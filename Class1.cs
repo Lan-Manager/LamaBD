@@ -8,5 +8,13 @@ namespace LamaBD
 {
     public class Class1
     {
+
+        public static bool verifyCredentials(string nomCompte, string motDePasse)
+        {
+            using (var ctx = new Connexion420())
+            {
+
+            }
+        }
     }
 }

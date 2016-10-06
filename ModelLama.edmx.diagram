@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6aa0b7186602430c9ba86fa11b31d3e4" Name="Diagram1">
+        <EntityTypeShape EntityType="bd_lama.comptes" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.equipes" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.equipesparticipants" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.equipesparties" Width="1.5" PointX="9.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.etatspostes" Width="1.5" PointX="3.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.jeux" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.jeuxcomptes" Width="1.5" PointX="12.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.locaux" Width="1.5" PointX="8" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.messages" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.participants" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.parties" Width="1.5" PointX="7.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.postes" Width="1.5" PointX="6" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.prix" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.prixtournois" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.scoresequipesparties" Width="1.5" PointX="12" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.statistiques" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.statistiquesjeux" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.tournois" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.tournoislocaux" Width="1.5" PointX="10.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bd_lama.tours" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <AssociationConnector Association="bd_lama.Messages_Comptes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Postes_Comptes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Tournois_Comptes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.TournoixLocaux_Comptes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Equipes_Tournois_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.EquipesParticipants_Equipes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.EquipesParties_Equipes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Prix_Equipes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Tournois_EquipesGagnante_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.EquipesParticipants_Participants_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.EquipesParties_Parties_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.ScoresEquipesParties_EquipesParties_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Postes_EtatsPostes_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.JeuxComptes_Jeux_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.StatistiquesJeux_Jeux_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Tournois_Jeux_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.JeuxComptes_Participants_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Postes_Locaux_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.TournoixLocaux_Locaux_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Parties_Tours_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.PrixTournois_Prix_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.PrixTournois_Tournois_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.ScoresEquipesParties_StatistiquesJeux_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.StatistiquesJeux_Satistiques_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.TournoixLocaux_Tournois_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="bd_lama.Tours_Tournois_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

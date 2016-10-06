@@ -1,0 +1,1590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bd_lama.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="comptes">
+          <Key>
+            <PropertyRef Name="idCompte" />
+          </Key>
+          <Property Name="idCompte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomUtilisateur" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="motDePasse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="courriel" Type="varchar" MaxLength="255" />
+          <Property Name="matricule" Type="varchar" MaxLength="7" />
+          <Property Name="nom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="estAdmin" Type="bool" Nullable="false" />
+          <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipes">
+          <Key>
+            <PropertyRef Name="idEquipe" />
+          </Key>
+          <Property Name="idEquipe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTournoi" Type="int" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="estElimine" Type="bool" Nullable="false" />
+          <Property Name="dateEnregistrement" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipesparticipants">
+          <Key>
+            <PropertyRef Name="idEquipeParticipant" />
+          </Key>
+          <Property Name="idEquipeParticipant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEquipe" Type="int" Nullable="false" />
+          <Property Name="idParticipant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipesparties">
+          <Key>
+            <PropertyRef Name="idEquipePartie" />
+          </Key>
+          <Property Name="idEquipePartie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPartie" Type="int" Nullable="false" />
+          <Property Name="idEquipe" Type="int" Nullable="false" />
+          <Property Name="estGagnante" Type="bool" />
+        </EntityType>
+        <EntityType Name="etatspostes">
+          <Key>
+            <PropertyRef Name="idEtatPoste" />
+          </Key>
+          <Property Name="idEtatPoste" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jeux">
+          <Key>
+            <PropertyRef Name="idJeu" />
+          </Key>
+          <Property Name="idJeu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jeuxcomptes">
+          <Key>
+            <PropertyRef Name="idJeuCompte" />
+          </Key>
+          <Property Name="idJeuCompte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idJeu" Type="int" Nullable="false" />
+          <Property Name="idParticipant" Type="int" Nullable="false" />
+          <Property Name="nomCompte" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="detail" Type="varchar" MaxLength="255" />
+          <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="locaux">
+          <Key>
+            <PropertyRef Name="idLocal" />
+          </Key>
+          <Property Name="idLocal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="aile" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="messages">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCompte" Type="int" Nullable="false" />
+          <Property Name="contenu" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="dateEnvoie" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="participants">
+          <Key>
+            <PropertyRef Name="idParticipant" />
+          </Key>
+          <Property Name="idParticipant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matricule" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="parties">
+          <Key>
+            <PropertyRef Name="idPartie" />
+          </Key>
+          <Property Name="idPartie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTour" Type="int" Nullable="false" />
+          <Property Name="numPartie" Type="int" Nullable="false" />
+          <Property Name="estTermine" Type="bool" Nullable="false" />
+          <Property Name="dureeJeu" Type="time" Precision="0" />
+          <Property Name="dateFin" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="postes">
+          <Key>
+            <PropertyRef Name="idPoste" />
+          </Key>
+          <Property Name="idPoste" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idLocal" Type="int" Nullable="false" />
+          <Property Name="idEtatPoste" Type="int" Nullable="false" />
+          <Property Name="idCompte" Type="int" />
+          <Property Name="numeroPoste" Type="int" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prix">
+          <Key>
+            <PropertyRef Name="idPrix" />
+          </Key>
+          <Property Name="idPrix" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEquipe" Type="int" />
+          <Property Name="nom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="rang" Type="int" />
+        </EntityType>
+        <EntityType Name="prixtournois">
+          <Key>
+            <PropertyRef Name="idPrixTournoi" />
+          </Key>
+          <Property Name="idPrixTournoi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPrix" Type="int" Nullable="false" />
+          <Property Name="idTournoi" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="scoresequipesparties">
+          <Key>
+            <PropertyRef Name="idScoreEquipePartie" />
+          </Key>
+          <Property Name="idScoreEquipePartie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStatistiqueJeu" Type="int" Nullable="false" />
+          <Property Name="idEquipePartie" Type="int" Nullable="false" />
+          <Property Name="valeur" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statistiques">
+          <Key>
+            <PropertyRef Name="idStatistique" />
+          </Key>
+          <Property Name="idStatistique" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="statistiquesjeux">
+          <Key>
+            <PropertyRef Name="idStatistiqueJeu" />
+          </Key>
+          <Property Name="idStatistiqueJeu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idJeu" Type="int" Nullable="false" />
+          <Property Name="idStatistique" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tournois">
+          <Key>
+            <PropertyRef Name="idTournoi" />
+          </Key>
+          <Property Name="idTournoi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idJeu" Type="int" Nullable="false" />
+          <Property Name="idCompte" Type="int" Nullable="false" />
+          <Property Name="idEquipe_gagnante" Type="int" />
+          <Property Name="nom" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="minJoueur" Type="int" Nullable="false" />
+          <Property Name="maxJoueurParEquipe" Type="int" />
+          <Property Name="minJoueurParEquipe" Type="int" Nullable="false" />
+          <Property Name="dateEvenement" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="enCours" Type="bool" Nullable="false" />
+          <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tournoislocaux">
+          <Key>
+            <PropertyRef Name="idTournoiLocal" />
+          </Key>
+          <Property Name="idTournoiLocal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTournoi" Type="int" Nullable="false" />
+          <Property Name="idLocal" Type="int" Nullable="false" />
+          <Property Name="idCompte" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tours">
+          <Key>
+            <PropertyRef Name="idTour" />
+          </Key>
+          <Property Name="idTour" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTournoi" Type="int" Nullable="false" />
+          <Property Name="numTour" Type="int" Nullable="false" />
+          <Property Name="estFinal" Type="bool" Nullable="false" />
+          <Property Name="dateDebut" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="dateFin" Type="datetime" Precision="0" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <Association Name="Equipes_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="equipes" Type="Self.equipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="equipes">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParticipants_Equipes_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="1" />
+          <End Role="equipesparticipants" Type="Self.equipesparticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="equipesparticipants">
+              <PropertyRef Name="idEquipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParticipants_Participants_FK">
+          <End Role="participants" Type="Self.participants" Multiplicity="1" />
+          <End Role="equipesparticipants" Type="Self.equipesparticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participants">
+              <PropertyRef Name="idParticipant" />
+            </Principal>
+            <Dependent Role="equipesparticipants">
+              <PropertyRef Name="idParticipant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParties_Equipes_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="1" />
+          <End Role="equipesparties" Type="Self.equipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="equipesparties">
+              <PropertyRef Name="idEquipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParties_Parties_FK">
+          <End Role="parties" Type="Self.parties" Multiplicity="1" />
+          <End Role="equipesparties" Type="Self.equipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parties">
+              <PropertyRef Name="idPartie" />
+            </Principal>
+            <Dependent Role="equipesparties">
+              <PropertyRef Name="idPartie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JeuxComptes_Jeux_FK">
+          <End Role="jeux" Type="Self.jeux" Multiplicity="1" />
+          <End Role="jeuxcomptes" Type="Self.jeuxcomptes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jeux">
+              <PropertyRef Name="idJeu" />
+            </Principal>
+            <Dependent Role="jeuxcomptes">
+              <PropertyRef Name="idJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JeuxComptes_Participants_FK">
+          <End Role="participants" Type="Self.participants" Multiplicity="1" />
+          <End Role="jeuxcomptes" Type="Self.jeuxcomptes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participants">
+              <PropertyRef Name="idParticipant" />
+            </Principal>
+            <Dependent Role="jeuxcomptes">
+              <PropertyRef Name="idParticipant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Messages_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
+          <End Role="messages" Type="Self.messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="messages">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Parties_Tours_FK">
+          <End Role="tours" Type="Self.tours" Multiplicity="1" />
+          <End Role="parties" Type="Self.parties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tours">
+              <PropertyRef Name="idTour" />
+            </Principal>
+            <Dependent Role="parties">
+              <PropertyRef Name="idTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="0..1" />
+          <End Role="postes" Type="Self.postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_EtatsPostes_FK">
+          <End Role="etatspostes" Type="Self.etatspostes" Multiplicity="1" />
+          <End Role="postes" Type="Self.postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="etatspostes">
+              <PropertyRef Name="idEtatPoste" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idEtatPoste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_Locaux_FK">
+          <End Role="locaux" Type="Self.locaux" Multiplicity="1" />
+          <End Role="postes" Type="Self.postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Prix_Equipes_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="0..1" />
+          <End Role="prix" Type="Self.prix" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="prix">
+              <PropertyRef Name="idEquipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PrixTournois_Prix_FK">
+          <End Role="prix" Type="Self.prix" Multiplicity="1" />
+          <End Role="prixtournois" Type="Self.prixtournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prix">
+              <PropertyRef Name="idPrix" />
+            </Principal>
+            <Dependent Role="prixtournois">
+              <PropertyRef Name="idPrix" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PrixTournois_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="prixtournois" Type="Self.prixtournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="prixtournois">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ScoresEquipesParties_EquipesParties_FK">
+          <End Role="equipesparties" Type="Self.equipesparties" Multiplicity="1" />
+          <End Role="scoresequipesparties" Type="Self.scoresequipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipesparties">
+              <PropertyRef Name="idEquipePartie" />
+            </Principal>
+            <Dependent Role="scoresequipesparties">
+              <PropertyRef Name="idEquipePartie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ScoresEquipesParties_StatistiquesJeux_FK">
+          <End Role="statistiquesjeux" Type="Self.statistiquesjeux" Multiplicity="1" />
+          <End Role="scoresequipesparties" Type="Self.scoresequipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statistiquesjeux">
+              <PropertyRef Name="idStatistiqueJeu" />
+            </Principal>
+            <Dependent Role="scoresequipesparties">
+              <PropertyRef Name="idStatistiqueJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatistiquesJeux_Jeux_FK">
+          <End Role="jeux" Type="Self.jeux" Multiplicity="1" />
+          <End Role="statistiquesjeux" Type="Self.statistiquesjeux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jeux">
+              <PropertyRef Name="idJeu" />
+            </Principal>
+            <Dependent Role="statistiquesjeux">
+              <PropertyRef Name="idJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatistiquesJeux_Satistiques_FK">
+          <End Role="statistiques" Type="Self.statistiques" Multiplicity="1" />
+          <End Role="statistiquesjeux" Type="Self.statistiquesjeux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statistiques">
+              <PropertyRef Name="idStatistique" />
+            </Principal>
+            <Dependent Role="statistiquesjeux">
+              <PropertyRef Name="idStatistique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tournois_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
+          <End Role="tournois" Type="Self.tournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="tournois">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tournois_EquipesGagnante_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="0..1" />
+          <End Role="tournois" Type="Self.tournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="tournois">
+              <PropertyRef Name="idEquipe_gagnante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tournois_Jeux_FK">
+          <End Role="jeux" Type="Self.jeux" Multiplicity="1" />
+          <End Role="tournois" Type="Self.tournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jeux">
+              <PropertyRef Name="idJeu" />
+            </Principal>
+            <Dependent Role="tournois">
+              <PropertyRef Name="idJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
+          <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Locaux_FK">
+          <End Role="locaux" Type="Self.locaux" Multiplicity="1" />
+          <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tours_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="tours" Type="Self.tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="tours">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_lamaStoreContainer">
+          <EntitySet Name="comptes" EntityType="Self.comptes" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="equipes" EntityType="Self.equipes" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="equipesparticipants" EntityType="Self.equipesparticipants" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="equipesparties" EntityType="Self.equipesparties" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="etatspostes" EntityType="Self.etatspostes" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="jeux" EntityType="Self.jeux" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="jeuxcomptes" EntityType="Self.jeuxcomptes" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="locaux" EntityType="Self.locaux" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="messages" EntityType="Self.messages" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="participants" EntityType="Self.participants" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="parties" EntityType="Self.parties" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="postes" EntityType="Self.postes" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="prix" EntityType="Self.prix" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="prixtournois" EntityType="Self.prixtournois" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="scoresequipesparties" EntityType="Self.scoresequipesparties" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="statistiques" EntityType="Self.statistiques" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="statistiquesjeux" EntityType="Self.statistiquesjeux" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="tournois" EntityType="Self.tournois" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="tournoislocaux" EntityType="Self.tournoislocaux" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <EntitySet Name="tours" EntityType="Self.tours" Schema="420.5a5.a16_lanman" store:Type="Tables" />
+          <AssociationSet Name="Equipes_Tournois_FK" Association="Self.Equipes_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="equipes" EntitySet="equipes" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParticipants_Equipes_FK" Association="Self.EquipesParticipants_Equipes_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="equipesparticipants" EntitySet="equipesparticipants" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParticipants_Participants_FK" Association="Self.EquipesParticipants_Participants_FK">
+            <End Role="participants" EntitySet="participants" />
+            <End Role="equipesparticipants" EntitySet="equipesparticipants" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParties_Equipes_FK" Association="Self.EquipesParties_Equipes_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="equipesparties" EntitySet="equipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParties_Parties_FK" Association="Self.EquipesParties_Parties_FK">
+            <End Role="parties" EntitySet="parties" />
+            <End Role="equipesparties" EntitySet="equipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="JeuxComptes_Jeux_FK" Association="Self.JeuxComptes_Jeux_FK">
+            <End Role="jeux" EntitySet="jeux" />
+            <End Role="jeuxcomptes" EntitySet="jeuxcomptes" />
+          </AssociationSet>
+          <AssociationSet Name="JeuxComptes_Participants_FK" Association="Self.JeuxComptes_Participants_FK">
+            <End Role="participants" EntitySet="participants" />
+            <End Role="jeuxcomptes" EntitySet="jeuxcomptes" />
+          </AssociationSet>
+          <AssociationSet Name="Messages_Comptes_FK" Association="Self.Messages_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="messages" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="Parties_Tours_FK" Association="Self.Parties_Tours_FK">
+            <End Role="tours" EntitySet="tours" />
+            <End Role="parties" EntitySet="parties" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_Comptes_FK" Association="Self.Postes_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_EtatsPostes_FK" Association="Self.Postes_EtatsPostes_FK">
+            <End Role="etatspostes" EntitySet="etatspostes" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_Locaux_FK" Association="Self.Postes_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="Prix_Equipes_FK" Association="Self.Prix_Equipes_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="prix" EntitySet="prix" />
+          </AssociationSet>
+          <AssociationSet Name="PrixTournois_Prix_FK" Association="Self.PrixTournois_Prix_FK">
+            <End Role="prix" EntitySet="prix" />
+            <End Role="prixtournois" EntitySet="prixtournois" />
+          </AssociationSet>
+          <AssociationSet Name="PrixTournois_Tournois_FK" Association="Self.PrixTournois_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="prixtournois" EntitySet="prixtournois" />
+          </AssociationSet>
+          <AssociationSet Name="ScoresEquipesParties_EquipesParties_FK" Association="Self.ScoresEquipesParties_EquipesParties_FK">
+            <End Role="equipesparties" EntitySet="equipesparties" />
+            <End Role="scoresequipesparties" EntitySet="scoresequipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="ScoresEquipesParties_StatistiquesJeux_FK" Association="Self.ScoresEquipesParties_StatistiquesJeux_FK">
+            <End Role="statistiquesjeux" EntitySet="statistiquesjeux" />
+            <End Role="scoresequipesparties" EntitySet="scoresequipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="StatistiquesJeux_Jeux_FK" Association="Self.StatistiquesJeux_Jeux_FK">
+            <End Role="jeux" EntitySet="jeux" />
+            <End Role="statistiquesjeux" EntitySet="statistiquesjeux" />
+          </AssociationSet>
+          <AssociationSet Name="StatistiquesJeux_Satistiques_FK" Association="Self.StatistiquesJeux_Satistiques_FK">
+            <End Role="statistiques" EntitySet="statistiques" />
+            <End Role="statistiquesjeux" EntitySet="statistiquesjeux" />
+          </AssociationSet>
+          <AssociationSet Name="Tournois_Comptes_FK" Association="Self.Tournois_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="tournois" EntitySet="tournois" />
+          </AssociationSet>
+          <AssociationSet Name="Tournois_EquipesGagnante_FK" Association="Self.Tournois_EquipesGagnante_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="tournois" EntitySet="tournois" />
+          </AssociationSet>
+          <AssociationSet Name="Tournois_Jeux_FK" Association="Self.Tournois_Jeux_FK">
+            <End Role="jeux" EntitySet="jeux" />
+            <End Role="tournois" EntitySet="tournois" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Comptes_FK" Association="Self.TournoixLocaux_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Locaux_FK" Association="Self.TournoixLocaux_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Tournois_FK" Association="Self.TournoixLocaux_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="Tours_Tournois_FK" Association="Self.Tours_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="tours" EntitySet="tours" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bd_lama" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="comptes">
+          <Key>
+            <PropertyRef Name="idCompte" />
+          </Key>
+          <Property Name="idCompte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomUtilisateur" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="motDePasse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courriel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="matricule" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="dateCreation" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="messages" Relationship="Self.Messages_Comptes_FK" FromRole="comptes" ToRole="messages" />
+          <NavigationProperty Name="postes" Relationship="Self.Postes_Comptes_FK" FromRole="comptes" ToRole="postes" />
+          <NavigationProperty Name="tournois" Relationship="Self.Tournois_Comptes_FK" FromRole="comptes" ToRole="tournois" />
+          <NavigationProperty Name="tournoislocaux" Relationship="Self.TournoixLocaux_Comptes_FK" FromRole="comptes" ToRole="tournoislocaux" />
+        </EntityType>
+        <EntityType Name="equipes">
+          <Key>
+            <PropertyRef Name="idEquipe" />
+          </Key>
+          <Property Name="idEquipe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTournoi" Type="Int32" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estElimine" Type="Boolean" Nullable="false" />
+          <Property Name="dateEnregistrement" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="tournois" Relationship="Self.Equipes_Tournois_FK" FromRole="equipes" ToRole="tournois" />
+          <NavigationProperty Name="equipesparticipants" Relationship="Self.EquipesParticipants_Equipes_FK" FromRole="equipes" ToRole="equipesparticipants" />
+          <NavigationProperty Name="equipesparties" Relationship="Self.EquipesParties_Equipes_FK" FromRole="equipes" ToRole="equipesparties" />
+          <NavigationProperty Name="prix" Relationship="Self.Prix_Equipes_FK" FromRole="equipes" ToRole="prix" />
+          <NavigationProperty Name="tournois1" Relationship="Self.Tournois_EquipesGagnante_FK" FromRole="equipes" ToRole="tournois" />
+        </EntityType>
+        <EntityType Name="equipesparticipants">
+          <Key>
+            <PropertyRef Name="idEquipeParticipant" />
+          </Key>
+          <Property Name="idEquipeParticipant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEquipe" Type="Int32" Nullable="false" />
+          <Property Name="idParticipant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="equipes" Relationship="Self.EquipesParticipants_Equipes_FK" FromRole="equipesparticipants" ToRole="equipes" />
+          <NavigationProperty Name="participants" Relationship="Self.EquipesParticipants_Participants_FK" FromRole="equipesparticipants" ToRole="participants" />
+        </EntityType>
+        <EntityType Name="equipesparties">
+          <Key>
+            <PropertyRef Name="idEquipePartie" />
+          </Key>
+          <Property Name="idEquipePartie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPartie" Type="Int32" Nullable="false" />
+          <Property Name="idEquipe" Type="Int32" Nullable="false" />
+          <Property Name="estGagnante" Type="Boolean" />
+          <NavigationProperty Name="equipes" Relationship="Self.EquipesParties_Equipes_FK" FromRole="equipesparties" ToRole="equipes" />
+          <NavigationProperty Name="parties" Relationship="Self.EquipesParties_Parties_FK" FromRole="equipesparties" ToRole="parties" />
+          <NavigationProperty Name="scoresequipesparties" Relationship="Self.ScoresEquipesParties_EquipesParties_FK" FromRole="equipesparties" ToRole="scoresequipesparties" />
+        </EntityType>
+        <EntityType Name="etatspostes">
+          <Key>
+            <PropertyRef Name="idEtatPoste" />
+          </Key>
+          <Property Name="idEtatPoste" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="postes" Relationship="Self.Postes_EtatsPostes_FK" FromRole="etatspostes" ToRole="postes" />
+        </EntityType>
+        <EntityType Name="jeux">
+          <Key>
+            <PropertyRef Name="idJeu" />
+          </Key>
+          <Property Name="idJeu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="jeuxcomptes" Relationship="Self.JeuxComptes_Jeux_FK" FromRole="jeux" ToRole="jeuxcomptes" />
+          <NavigationProperty Name="statistiquesjeux" Relationship="Self.StatistiquesJeux_Jeux_FK" FromRole="jeux" ToRole="statistiquesjeux" />
+          <NavigationProperty Name="tournois" Relationship="Self.Tournois_Jeux_FK" FromRole="jeux" ToRole="tournois" />
+        </EntityType>
+        <EntityType Name="jeuxcomptes">
+          <Key>
+            <PropertyRef Name="idJeuCompte" />
+          </Key>
+          <Property Name="idJeuCompte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idJeu" Type="Int32" Nullable="false" />
+          <Property Name="idParticipant" Type="Int32" Nullable="false" />
+          <Property Name="nomCompte" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dateCreation" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="jeux" Relationship="Self.JeuxComptes_Jeux_FK" FromRole="jeuxcomptes" ToRole="jeux" />
+          <NavigationProperty Name="participants" Relationship="Self.JeuxComptes_Participants_FK" FromRole="jeuxcomptes" ToRole="participants" />
+        </EntityType>
+        <EntityType Name="locaux">
+          <Key>
+            <PropertyRef Name="idLocal" />
+          </Key>
+          <Property Name="idLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aile" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="postes" Relationship="Self.Postes_Locaux_FK" FromRole="locaux" ToRole="postes" />
+          <NavigationProperty Name="tournoislocaux" Relationship="Self.TournoixLocaux_Locaux_FK" FromRole="locaux" ToRole="tournoislocaux" />
+        </EntityType>
+        <EntityType Name="messages">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCompte" Type="Int32" Nullable="false" />
+          <Property Name="contenu" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateEnvoie" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="comptes" Relationship="Self.Messages_Comptes_FK" FromRole="messages" ToRole="comptes" />
+        </EntityType>
+        <EntityType Name="participants">
+          <Key>
+            <PropertyRef Name="idParticipant" />
+          </Key>
+          <Property Name="idParticipant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matricule" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateCreation" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="equipesparticipants" Relationship="Self.EquipesParticipants_Participants_FK" FromRole="participants" ToRole="equipesparticipants" />
+          <NavigationProperty Name="jeuxcomptes" Relationship="Self.JeuxComptes_Participants_FK" FromRole="participants" ToRole="jeuxcomptes" />
+        </EntityType>
+        <EntityType Name="parties">
+          <Key>
+            <PropertyRef Name="idPartie" />
+          </Key>
+          <Property Name="idPartie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTour" Type="Int32" Nullable="false" />
+          <Property Name="numPartie" Type="Int32" Nullable="false" />
+          <Property Name="estTermine" Type="Boolean" Nullable="false" />
+          <Property Name="dureeJeu" Type="Time" />
+          <Property Name="dateFin" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="equipesparties" Relationship="Self.EquipesParties_Parties_FK" FromRole="parties" ToRole="equipesparties" />
+          <NavigationProperty Name="tours" Relationship="Self.Parties_Tours_FK" FromRole="parties" ToRole="tours" />
+        </EntityType>
+        <EntityType Name="postes">
+          <Key>
+            <PropertyRef Name="idPoste" />
+          </Key>
+          <Property Name="idPoste" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idLocal" Type="Int32" Nullable="false" />
+          <Property Name="idEtatPoste" Type="Int32" Nullable="false" />
+          <Property Name="idCompte" Type="Int32" />
+          <Property Name="numeroPoste" Type="Int32" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="comptes" Relationship="Self.Postes_Comptes_FK" FromRole="postes" ToRole="comptes" />
+          <NavigationProperty Name="etatspostes" Relationship="Self.Postes_EtatsPostes_FK" FromRole="postes" ToRole="etatspostes" />
+          <NavigationProperty Name="locaux" Relationship="Self.Postes_Locaux_FK" FromRole="postes" ToRole="locaux" />
+        </EntityType>
+        <EntityType Name="prix">
+          <Key>
+            <PropertyRef Name="idPrix" />
+          </Key>
+          <Property Name="idPrix" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEquipe" Type="Int32" />
+          <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rang" Type="Int32" />
+          <NavigationProperty Name="equipes" Relationship="Self.Prix_Equipes_FK" FromRole="prix" ToRole="equipes" />
+          <NavigationProperty Name="prixtournois" Relationship="Self.PrixTournois_Prix_FK" FromRole="prix" ToRole="prixtournois" />
+        </EntityType>
+        <EntityType Name="prixtournois">
+          <Key>
+            <PropertyRef Name="idPrixTournoi" />
+          </Key>
+          <Property Name="idPrixTournoi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPrix" Type="Int32" Nullable="false" />
+          <Property Name="idTournoi" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="prix" Relationship="Self.PrixTournois_Prix_FK" FromRole="prixtournois" ToRole="prix" />
+          <NavigationProperty Name="tournois" Relationship="Self.PrixTournois_Tournois_FK" FromRole="prixtournois" ToRole="tournois" />
+        </EntityType>
+        <EntityType Name="scoresequipesparties">
+          <Key>
+            <PropertyRef Name="idScoreEquipePartie" />
+          </Key>
+          <Property Name="idScoreEquipePartie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStatistiqueJeu" Type="Int32" Nullable="false" />
+          <Property Name="idEquipePartie" Type="Int32" Nullable="false" />
+          <Property Name="valeur" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="equipesparties" Relationship="Self.ScoresEquipesParties_EquipesParties_FK" FromRole="scoresequipesparties" ToRole="equipesparties" />
+          <NavigationProperty Name="statistiquesjeux" Relationship="Self.ScoresEquipesParties_StatistiquesJeux_FK" FromRole="scoresequipesparties" ToRole="statistiquesjeux" />
+        </EntityType>
+        <EntityType Name="statistiques">
+          <Key>
+            <PropertyRef Name="idStatistique" />
+          </Key>
+          <Property Name="idStatistique" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="statistiquesjeux" Relationship="Self.StatistiquesJeux_Satistiques_FK" FromRole="statistiques" ToRole="statistiquesjeux" />
+        </EntityType>
+        <EntityType Name="statistiquesjeux">
+          <Key>
+            <PropertyRef Name="idStatistiqueJeu" />
+          </Key>
+          <Property Name="idStatistiqueJeu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idJeu" Type="Int32" Nullable="false" />
+          <Property Name="idStatistique" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="jeux" Relationship="Self.StatistiquesJeux_Jeux_FK" FromRole="statistiquesjeux" ToRole="jeux" />
+          <NavigationProperty Name="scoresequipesparties" Relationship="Self.ScoresEquipesParties_StatistiquesJeux_FK" FromRole="statistiquesjeux" ToRole="scoresequipesparties" />
+          <NavigationProperty Name="statistiques" Relationship="Self.StatistiquesJeux_Satistiques_FK" FromRole="statistiquesjeux" ToRole="statistiques" />
+        </EntityType>
+        <EntityType Name="tournois">
+          <Key>
+            <PropertyRef Name="idTournoi" />
+          </Key>
+          <Property Name="idTournoi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idJeu" Type="Int32" Nullable="false" />
+          <Property Name="idCompte" Type="Int32" Nullable="false" />
+          <Property Name="idEquipe_gagnante" Type="Int32" />
+          <Property Name="nom" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="minJoueur" Type="Int32" Nullable="false" />
+          <Property Name="maxJoueurParEquipe" Type="Int32" />
+          <Property Name="minJoueurParEquipe" Type="Int32" Nullable="false" />
+          <Property Name="dateEvenement" Type="DateTime" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="enCours" Type="Boolean" Nullable="false" />
+          <Property Name="dateCreation" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="comptes" Relationship="Self.Tournois_Comptes_FK" FromRole="tournois" ToRole="comptes" />
+          <NavigationProperty Name="equipes" Relationship="Self.Equipes_Tournois_FK" FromRole="tournois" ToRole="equipes" />
+          <NavigationProperty Name="equipes1" Relationship="Self.Tournois_EquipesGagnante_FK" FromRole="tournois" ToRole="equipes" />
+          <NavigationProperty Name="jeux" Relationship="Self.Tournois_Jeux_FK" FromRole="tournois" ToRole="jeux" />
+          <NavigationProperty Name="prixtournois" Relationship="Self.PrixTournois_Tournois_FK" FromRole="tournois" ToRole="prixtournois" />
+          <NavigationProperty Name="tournoislocaux" Relationship="Self.TournoixLocaux_Tournois_FK" FromRole="tournois" ToRole="tournoislocaux" />
+          <NavigationProperty Name="tours" Relationship="Self.Tours_Tournois_FK" FromRole="tournois" ToRole="tours" />
+        </EntityType>
+        <EntityType Name="tournoislocaux">
+          <Key>
+            <PropertyRef Name="idTournoiLocal" />
+          </Key>
+          <Property Name="idTournoiLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTournoi" Type="Int32" Nullable="false" />
+          <Property Name="idLocal" Type="Int32" Nullable="false" />
+          <Property Name="idCompte" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comptes" Relationship="Self.TournoixLocaux_Comptes_FK" FromRole="tournoislocaux" ToRole="comptes" />
+          <NavigationProperty Name="locaux" Relationship="Self.TournoixLocaux_Locaux_FK" FromRole="tournoislocaux" ToRole="locaux" />
+          <NavigationProperty Name="tournois" Relationship="Self.TournoixLocaux_Tournois_FK" FromRole="tournoislocaux" ToRole="tournois" />
+        </EntityType>
+        <EntityType Name="tours">
+          <Key>
+            <PropertyRef Name="idTour" />
+          </Key>
+          <Property Name="idTour" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTournoi" Type="Int32" Nullable="false" />
+          <Property Name="numTour" Type="Int32" Nullable="false" />
+          <Property Name="estFinal" Type="Boolean" Nullable="false" />
+          <Property Name="dateDebut" Type="DateTime" Nullable="false" />
+          <Property Name="dateFin" Type="DateTime" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="parties" Relationship="Self.Parties_Tours_FK" FromRole="tours" ToRole="parties" />
+          <NavigationProperty Name="tournois" Relationship="Self.Tours_Tournois_FK" FromRole="tours" ToRole="tournois" />
+        </EntityType>
+        <Association Name="Messages_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
+          <End Role="messages" Type="Self.messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="messages">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="0..1" />
+          <End Role="postes" Type="Self.postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tournois_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
+          <End Role="tournois" Type="Self.tournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="tournois">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Comptes_FK">
+          <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
+          <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Equipes_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="equipes" Type="Self.equipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="equipes">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParticipants_Equipes_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="1" />
+          <End Role="equipesparticipants" Type="Self.equipesparticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="equipesparticipants">
+              <PropertyRef Name="idEquipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParties_Equipes_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="1" />
+          <End Role="equipesparties" Type="Self.equipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="equipesparties">
+              <PropertyRef Name="idEquipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Prix_Equipes_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="0..1" />
+          <End Role="prix" Type="Self.prix" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="prix">
+              <PropertyRef Name="idEquipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tournois_EquipesGagnante_FK">
+          <End Role="equipes" Type="Self.equipes" Multiplicity="0..1" />
+          <End Role="tournois" Type="Self.tournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipes">
+              <PropertyRef Name="idEquipe" />
+            </Principal>
+            <Dependent Role="tournois">
+              <PropertyRef Name="idEquipe_gagnante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParticipants_Participants_FK">
+          <End Role="participants" Type="Self.participants" Multiplicity="1" />
+          <End Role="equipesparticipants" Type="Self.equipesparticipants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participants">
+              <PropertyRef Name="idParticipant" />
+            </Principal>
+            <Dependent Role="equipesparticipants">
+              <PropertyRef Name="idParticipant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EquipesParties_Parties_FK">
+          <End Role="parties" Type="Self.parties" Multiplicity="1" />
+          <End Role="equipesparties" Type="Self.equipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parties">
+              <PropertyRef Name="idPartie" />
+            </Principal>
+            <Dependent Role="equipesparties">
+              <PropertyRef Name="idPartie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ScoresEquipesParties_EquipesParties_FK">
+          <End Role="equipesparties" Type="Self.equipesparties" Multiplicity="1" />
+          <End Role="scoresequipesparties" Type="Self.scoresequipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipesparties">
+              <PropertyRef Name="idEquipePartie" />
+            </Principal>
+            <Dependent Role="scoresequipesparties">
+              <PropertyRef Name="idEquipePartie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_EtatsPostes_FK">
+          <End Role="etatspostes" Type="Self.etatspostes" Multiplicity="1" />
+          <End Role="postes" Type="Self.postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="etatspostes">
+              <PropertyRef Name="idEtatPoste" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idEtatPoste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JeuxComptes_Jeux_FK">
+          <End Role="jeux" Type="Self.jeux" Multiplicity="1" />
+          <End Role="jeuxcomptes" Type="Self.jeuxcomptes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jeux">
+              <PropertyRef Name="idJeu" />
+            </Principal>
+            <Dependent Role="jeuxcomptes">
+              <PropertyRef Name="idJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatistiquesJeux_Jeux_FK">
+          <End Role="jeux" Type="Self.jeux" Multiplicity="1" />
+          <End Role="statistiquesjeux" Type="Self.statistiquesjeux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jeux">
+              <PropertyRef Name="idJeu" />
+            </Principal>
+            <Dependent Role="statistiquesjeux">
+              <PropertyRef Name="idJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tournois_Jeux_FK">
+          <End Role="jeux" Type="Self.jeux" Multiplicity="1" />
+          <End Role="tournois" Type="Self.tournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jeux">
+              <PropertyRef Name="idJeu" />
+            </Principal>
+            <Dependent Role="tournois">
+              <PropertyRef Name="idJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JeuxComptes_Participants_FK">
+          <End Role="participants" Type="Self.participants" Multiplicity="1" />
+          <End Role="jeuxcomptes" Type="Self.jeuxcomptes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="participants">
+              <PropertyRef Name="idParticipant" />
+            </Principal>
+            <Dependent Role="jeuxcomptes">
+              <PropertyRef Name="idParticipant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_Locaux_FK">
+          <End Role="locaux" Type="Self.locaux" Multiplicity="1" />
+          <End Role="postes" Type="Self.postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Locaux_FK">
+          <End Role="locaux" Type="Self.locaux" Multiplicity="1" />
+          <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Parties_Tours_FK">
+          <End Role="tours" Type="Self.tours" Multiplicity="1" />
+          <End Role="parties" Type="Self.parties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tours">
+              <PropertyRef Name="idTour" />
+            </Principal>
+            <Dependent Role="parties">
+              <PropertyRef Name="idTour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PrixTournois_Prix_FK">
+          <End Role="prix" Type="Self.prix" Multiplicity="1" />
+          <End Role="prixtournois" Type="Self.prixtournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="prix">
+              <PropertyRef Name="idPrix" />
+            </Principal>
+            <Dependent Role="prixtournois">
+              <PropertyRef Name="idPrix" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PrixTournois_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="prixtournois" Type="Self.prixtournois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="prixtournois">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ScoresEquipesParties_StatistiquesJeux_FK">
+          <End Role="statistiquesjeux" Type="Self.statistiquesjeux" Multiplicity="1" />
+          <End Role="scoresequipesparties" Type="Self.scoresequipesparties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statistiquesjeux">
+              <PropertyRef Name="idStatistiqueJeu" />
+            </Principal>
+            <Dependent Role="scoresequipesparties">
+              <PropertyRef Name="idStatistiqueJeu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StatistiquesJeux_Satistiques_FK">
+          <End Role="statistiques" Type="Self.statistiques" Multiplicity="1" />
+          <End Role="statistiquesjeux" Type="Self.statistiquesjeux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statistiques">
+              <PropertyRef Name="idStatistique" />
+            </Principal>
+            <Dependent Role="statistiquesjeux">
+              <PropertyRef Name="idStatistique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tours_Tournois_FK">
+          <End Role="tournois" Type="Self.tournois" Multiplicity="1" />
+          <End Role="tours" Type="Self.tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="tours">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Connexion420" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="comptes" EntityType="Self.comptes" />
+          <EntitySet Name="equipes" EntityType="Self.equipes" />
+          <EntitySet Name="equipesparticipants" EntityType="Self.equipesparticipants" />
+          <EntitySet Name="equipesparties" EntityType="Self.equipesparties" />
+          <EntitySet Name="etatspostes" EntityType="Self.etatspostes" />
+          <EntitySet Name="jeux" EntityType="Self.jeux" />
+          <EntitySet Name="jeuxcomptes" EntityType="Self.jeuxcomptes" />
+          <EntitySet Name="locaux" EntityType="Self.locaux" />
+          <EntitySet Name="messages" EntityType="Self.messages" />
+          <EntitySet Name="participants" EntityType="Self.participants" />
+          <EntitySet Name="parties" EntityType="Self.parties" />
+          <EntitySet Name="postes" EntityType="Self.postes" />
+          <EntitySet Name="prix" EntityType="Self.prix" />
+          <EntitySet Name="prixtournois" EntityType="Self.prixtournois" />
+          <EntitySet Name="scoresequipesparties" EntityType="Self.scoresequipesparties" />
+          <EntitySet Name="statistiques" EntityType="Self.statistiques" />
+          <EntitySet Name="statistiquesjeux" EntityType="Self.statistiquesjeux" />
+          <EntitySet Name="tournois" EntityType="Self.tournois" />
+          <EntitySet Name="tournoislocaux" EntityType="Self.tournoislocaux" />
+          <EntitySet Name="tours" EntityType="Self.tours" />
+          <AssociationSet Name="Messages_Comptes_FK" Association="Self.Messages_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="messages" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_Comptes_FK" Association="Self.Postes_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="Tournois_Comptes_FK" Association="Self.Tournois_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="tournois" EntitySet="tournois" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Comptes_FK" Association="Self.TournoixLocaux_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="Equipes_Tournois_FK" Association="Self.Equipes_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="equipes" EntitySet="equipes" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParticipants_Equipes_FK" Association="Self.EquipesParticipants_Equipes_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="equipesparticipants" EntitySet="equipesparticipants" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParties_Equipes_FK" Association="Self.EquipesParties_Equipes_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="equipesparties" EntitySet="equipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="Prix_Equipes_FK" Association="Self.Prix_Equipes_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="prix" EntitySet="prix" />
+          </AssociationSet>
+          <AssociationSet Name="Tournois_EquipesGagnante_FK" Association="Self.Tournois_EquipesGagnante_FK">
+            <End Role="equipes" EntitySet="equipes" />
+            <End Role="tournois" EntitySet="tournois" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParticipants_Participants_FK" Association="Self.EquipesParticipants_Participants_FK">
+            <End Role="participants" EntitySet="participants" />
+            <End Role="equipesparticipants" EntitySet="equipesparticipants" />
+          </AssociationSet>
+          <AssociationSet Name="EquipesParties_Parties_FK" Association="Self.EquipesParties_Parties_FK">
+            <End Role="parties" EntitySet="parties" />
+            <End Role="equipesparties" EntitySet="equipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="ScoresEquipesParties_EquipesParties_FK" Association="Self.ScoresEquipesParties_EquipesParties_FK">
+            <End Role="equipesparties" EntitySet="equipesparties" />
+            <End Role="scoresequipesparties" EntitySet="scoresequipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_EtatsPostes_FK" Association="Self.Postes_EtatsPostes_FK">
+            <End Role="etatspostes" EntitySet="etatspostes" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="JeuxComptes_Jeux_FK" Association="Self.JeuxComptes_Jeux_FK">
+            <End Role="jeux" EntitySet="jeux" />
+            <End Role="jeuxcomptes" EntitySet="jeuxcomptes" />
+          </AssociationSet>
+          <AssociationSet Name="StatistiquesJeux_Jeux_FK" Association="Self.StatistiquesJeux_Jeux_FK">
+            <End Role="jeux" EntitySet="jeux" />
+            <End Role="statistiquesjeux" EntitySet="statistiquesjeux" />
+          </AssociationSet>
+          <AssociationSet Name="Tournois_Jeux_FK" Association="Self.Tournois_Jeux_FK">
+            <End Role="jeux" EntitySet="jeux" />
+            <End Role="tournois" EntitySet="tournois" />
+          </AssociationSet>
+          <AssociationSet Name="JeuxComptes_Participants_FK" Association="Self.JeuxComptes_Participants_FK">
+            <End Role="participants" EntitySet="participants" />
+            <End Role="jeuxcomptes" EntitySet="jeuxcomptes" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_Locaux_FK" Association="Self.Postes_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Locaux_FK" Association="Self.TournoixLocaux_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="Parties_Tours_FK" Association="Self.Parties_Tours_FK">
+            <End Role="tours" EntitySet="tours" />
+            <End Role="parties" EntitySet="parties" />
+          </AssociationSet>
+          <AssociationSet Name="PrixTournois_Prix_FK" Association="Self.PrixTournois_Prix_FK">
+            <End Role="prix" EntitySet="prix" />
+            <End Role="prixtournois" EntitySet="prixtournois" />
+          </AssociationSet>
+          <AssociationSet Name="PrixTournois_Tournois_FK" Association="Self.PrixTournois_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="prixtournois" EntitySet="prixtournois" />
+          </AssociationSet>
+          <AssociationSet Name="ScoresEquipesParties_StatistiquesJeux_FK" Association="Self.ScoresEquipesParties_StatistiquesJeux_FK">
+            <End Role="statistiquesjeux" EntitySet="statistiquesjeux" />
+            <End Role="scoresequipesparties" EntitySet="scoresequipesparties" />
+          </AssociationSet>
+          <AssociationSet Name="StatistiquesJeux_Satistiques_FK" Association="Self.StatistiquesJeux_Satistiques_FK">
+            <End Role="statistiques" EntitySet="statistiques" />
+            <End Role="statistiquesjeux" EntitySet="statistiquesjeux" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Tournois_FK" Association="Self.TournoixLocaux_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="Tours_Tournois_FK" Association="Self.Tours_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="tours" EntitySet="tours" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bd_lamaStoreContainer" CdmEntityContainer="Connexion420">
+          <EntitySetMapping Name="comptes">
+            <EntityTypeMapping TypeName="bd_lama.comptes">
+              <MappingFragment StoreEntitySet="comptes">
+                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
+                <ScalarProperty Name="nomUtilisateur" ColumnName="nomUtilisateur" />
+                <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="matricule" ColumnName="matricule" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="estAdmin" ColumnName="estAdmin" />
+                <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipes">
+            <EntityTypeMapping TypeName="bd_lama.equipes">
+              <MappingFragment StoreEntitySet="equipes">
+                <ScalarProperty Name="idEquipe" ColumnName="idEquipe" />
+                <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="estElimine" ColumnName="estElimine" />
+                <ScalarProperty Name="dateEnregistrement" ColumnName="dateEnregistrement" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipesparticipants">
+            <EntityTypeMapping TypeName="bd_lama.equipesparticipants">
+              <MappingFragment StoreEntitySet="equipesparticipants">
+                <ScalarProperty Name="idEquipeParticipant" ColumnName="idEquipeParticipant" />
+                <ScalarProperty Name="idEquipe" ColumnName="idEquipe" />
+                <ScalarProperty Name="idParticipant" ColumnName="idParticipant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipesparties">
+            <EntityTypeMapping TypeName="bd_lama.equipesparties">
+              <MappingFragment StoreEntitySet="equipesparties">
+                <ScalarProperty Name="idEquipePartie" ColumnName="idEquipePartie" />
+                <ScalarProperty Name="idPartie" ColumnName="idPartie" />
+                <ScalarProperty Name="idEquipe" ColumnName="idEquipe" />
+                <ScalarProperty Name="estGagnante" ColumnName="estGagnante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="etatspostes">
+            <EntityTypeMapping TypeName="bd_lama.etatspostes">
+              <MappingFragment StoreEntitySet="etatspostes">
+                <ScalarProperty Name="idEtatPoste" ColumnName="idEtatPoste" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jeux">
+            <EntityTypeMapping TypeName="bd_lama.jeux">
+              <MappingFragment StoreEntitySet="jeux">
+                <ScalarProperty Name="idJeu" ColumnName="idJeu" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jeuxcomptes">
+            <EntityTypeMapping TypeName="bd_lama.jeuxcomptes">
+              <MappingFragment StoreEntitySet="jeuxcomptes">
+                <ScalarProperty Name="idJeuCompte" ColumnName="idJeuCompte" />
+                <ScalarProperty Name="idJeu" ColumnName="idJeu" />
+                <ScalarProperty Name="idParticipant" ColumnName="idParticipant" />
+                <ScalarProperty Name="nomCompte" ColumnName="nomCompte" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locaux">
+            <EntityTypeMapping TypeName="bd_lama.locaux">
+              <MappingFragment StoreEntitySet="locaux">
+                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="aile" ColumnName="aile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="messages">
+            <EntityTypeMapping TypeName="bd_lama.messages">
+              <MappingFragment StoreEntitySet="messages">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
+                <ScalarProperty Name="contenu" ColumnName="contenu" />
+                <ScalarProperty Name="dateEnvoie" ColumnName="dateEnvoie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="participants">
+            <EntityTypeMapping TypeName="bd_lama.participants">
+              <MappingFragment StoreEntitySet="participants">
+                <ScalarProperty Name="idParticipant" ColumnName="idParticipant" />
+                <ScalarProperty Name="matricule" ColumnName="matricule" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parties">
+            <EntityTypeMapping TypeName="bd_lama.parties">
+              <MappingFragment StoreEntitySet="parties">
+                <ScalarProperty Name="idPartie" ColumnName="idPartie" />
+                <ScalarProperty Name="idTour" ColumnName="idTour" />
+                <ScalarProperty Name="numPartie" ColumnName="numPartie" />
+                <ScalarProperty Name="estTermine" ColumnName="estTermine" />
+                <ScalarProperty Name="dureeJeu" ColumnName="dureeJeu" />
+                <ScalarProperty Name="dateFin" ColumnName="dateFin" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postes">
+            <EntityTypeMapping TypeName="bd_lama.postes">
+              <MappingFragment StoreEntitySet="postes">
+                <ScalarProperty Name="idPoste" ColumnName="idPoste" />
+                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
+                <ScalarProperty Name="idEtatPoste" ColumnName="idEtatPoste" />
+                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
+                <ScalarProperty Name="numeroPoste" ColumnName="numeroPoste" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prix">
+            <EntityTypeMapping TypeName="bd_lama.prix">
+              <MappingFragment StoreEntitySet="prix">
+                <ScalarProperty Name="idPrix" ColumnName="idPrix" />
+                <ScalarProperty Name="idEquipe" ColumnName="idEquipe" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="rang" ColumnName="rang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prixtournois">
+            <EntityTypeMapping TypeName="bd_lama.prixtournois">
+              <MappingFragment StoreEntitySet="prixtournois">
+                <ScalarProperty Name="idPrixTournoi" ColumnName="idPrixTournoi" />
+                <ScalarProperty Name="idPrix" ColumnName="idPrix" />
+                <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scoresequipesparties">
+            <EntityTypeMapping TypeName="bd_lama.scoresequipesparties">
+              <MappingFragment StoreEntitySet="scoresequipesparties">
+                <ScalarProperty Name="idScoreEquipePartie" ColumnName="idScoreEquipePartie" />
+                <ScalarProperty Name="idStatistiqueJeu" ColumnName="idStatistiqueJeu" />
+                <ScalarProperty Name="idEquipePartie" ColumnName="idEquipePartie" />
+                <ScalarProperty Name="valeur" ColumnName="valeur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statistiques">
+            <EntityTypeMapping TypeName="bd_lama.statistiques">
+              <MappingFragment StoreEntitySet="statistiques">
+                <ScalarProperty Name="idStatistique" ColumnName="idStatistique" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statistiquesjeux">
+            <EntityTypeMapping TypeName="bd_lama.statistiquesjeux">
+              <MappingFragment StoreEntitySet="statistiquesjeux">
+                <ScalarProperty Name="idStatistiqueJeu" ColumnName="idStatistiqueJeu" />
+                <ScalarProperty Name="idJeu" ColumnName="idJeu" />
+                <ScalarProperty Name="idStatistique" ColumnName="idStatistique" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tournois">
+            <EntityTypeMapping TypeName="bd_lama.tournois">
+              <MappingFragment StoreEntitySet="tournois">
+                <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
+                <ScalarProperty Name="idJeu" ColumnName="idJeu" />
+                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
+                <ScalarProperty Name="idEquipe_gagnante" ColumnName="idEquipe_gagnante" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="minJoueur" ColumnName="minJoueur" />
+                <ScalarProperty Name="maxJoueurParEquipe" ColumnName="maxJoueurParEquipe" />
+                <ScalarProperty Name="minJoueurParEquipe" ColumnName="minJoueurParEquipe" />
+                <ScalarProperty Name="dateEvenement" ColumnName="dateEvenement" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="enCours" ColumnName="enCours" />
+                <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tournoislocaux">
+            <EntityTypeMapping TypeName="bd_lama.tournoislocaux">
+              <MappingFragment StoreEntitySet="tournoislocaux">
+                <ScalarProperty Name="idTournoiLocal" ColumnName="idTournoiLocal" />
+                <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
+                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
+                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tours">
+            <EntityTypeMapping TypeName="bd_lama.tours">
+              <MappingFragment StoreEntitySet="tours">
+                <ScalarProperty Name="idTour" ColumnName="idTour" />
+                <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
+                <ScalarProperty Name="numTour" ColumnName="numTour" />
+                <ScalarProperty Name="estFinal" ColumnName="estFinal" />
+                <ScalarProperty Name="dateDebut" ColumnName="dateDebut" />
+                <ScalarProperty Name="dateFin" ColumnName="dateFin" />
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
