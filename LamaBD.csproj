@@ -75,6 +75,7 @@
     <Compile Include="etatspostes.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
+    <Compile Include="helper\CompteHelper.cs" />
     <Compile Include="jeux.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
