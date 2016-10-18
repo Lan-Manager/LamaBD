@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LamaBD.helper
 {
-    public class CompteHelper
+    class templateHelper
     {
         public async static Task<List<comptes>> SelectAllAsync()
         {
@@ -38,24 +38,6 @@ namespace LamaBD.helper
             }
         }
 
-        /// <summary>
-        /// Retourne de façon async une liste de compte selon le critère de sélection s'il est administrateur ou non.
-        /// Par défaut retourne tout les administrateur.
-        /// </summary>
-        /// <param name="estAdmin">Vrai par défaut, mettez à false pour retourner les non admins.</param>
-        /// <returns></returns>
-        public static async Task<List<comptes>> SelectAllAdminAsync(bool estAdmin = true)
-        {
-            using (var ctx = new Connexion420())
-            {
-                var query = from c in ctx.comptes
-                            where c.estAdmin == estAdmin
-                            orderby c.nomUtilisateur ascending
-                            select c;
-                return await query.ToListAsync();
-            }
-        }
-
         public static async Task<bool> InsertAsync(comptes obj)
         {
             using (var ctx = new Connexion420())
@@ -73,13 +55,7 @@ namespace LamaBD.helper
             using (var ctx = new Connexion420())
             {
                 comptes courant = await ctx.comptes.FindAsync(obj.idCompte);
-                courant.courriel = obj.courriel;
-                courant.estAdmin = obj.estAdmin;
-                courant.matricule = obj.matricule;
-                courant.motDePasse = obj.motDePasse;
-                courant.nom = obj.nom;
                 //courant.nomUtilisateur = courant.nomUtilisateur;
-                courant.prenom = obj.prenom;
                 await ctx.SaveChangesAsync();
                 return true;
             }
