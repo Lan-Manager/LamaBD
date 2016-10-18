@@ -8,5 +8,7 @@ namespace LamaBD
 {
     public class Class1
     {
+
+
     }
 }
