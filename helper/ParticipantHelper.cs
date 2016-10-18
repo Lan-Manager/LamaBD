@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace LamaBD.helper
 {
+    public class Participant_NomCompte
+    {
+        public participants Participant { get; set; }
+        public string NomCompte { get; set; }
+    }
+
     public class ParticipantHelper
     {
         public async static Task<List<participants>> SelectAllAsync()
@@ -20,7 +26,7 @@ namespace LamaBD.helper
             }
         }
 
-        public async static Task<List<participants>> SelectLoLPlayersAsync()
+        public async static Task<List<Participant_NomCompte>> SelectLoLPlayersAsync()
         {
             using (var ctx = new Connexion420())
             {
@@ -28,7 +34,7 @@ namespace LamaBD.helper
                             join j in ctx.jeux on jc.idJeu equals j.idJeu
                             join p in ctx.participants on jc.idParticipant equals p.idParticipant
                             where j.nom == "League of Legends"
-                            select p;
+                            select new Participant_NomCompte { Participant = p, NomCompte = jc.nomCompte };
                 return await query.ToListAsync();
             }
         }

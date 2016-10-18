@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bd_lama.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="bd_lama.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="comptes">
           <Key>
             <PropertyRef Name="idCompte" />
@@ -79,8 +79,7 @@
             <PropertyRef Name="idLocal" />
           </Key>
           <Property Name="idLocal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="numero" Type="varchar" MaxLength="3" Nullable="false" />
-          <Property Name="aile" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="4" Nullable="false" />
         </EntityType>
         <EntityType Name="messages">
           <Key>
@@ -643,8 +642,7 @@
             <End Role="tours" EntitySet="tours" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bd_lama" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -737,16 +735,6 @@
           <NavigationProperty Name="jeux" Relationship="Self.JeuxComptes_Jeux_FK" FromRole="jeuxcomptes" ToRole="jeux" />
           <NavigationProperty Name="participants" Relationship="Self.JeuxComptes_Participants_FK" FromRole="jeuxcomptes" ToRole="participants" />
         </EntityType>
-        <EntityType Name="locaux">
-          <Key>
-            <PropertyRef Name="idLocal" />
-          </Key>
-          <Property Name="idLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="numero" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="aile" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="postes" Relationship="Self.Postes_Locaux_FK" FromRole="locaux" ToRole="postes" />
-          <NavigationProperty Name="tournoislocaux" Relationship="Self.TournoixLocaux_Locaux_FK" FromRole="locaux" ToRole="tournoislocaux" />
-        </EntityType>
         <EntityType Name="messages">
           <Key>
             <PropertyRef Name="idMessage" />
@@ -796,7 +784,7 @@
           <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="comptes" Relationship="Self.Postes_Comptes_FK" FromRole="postes" ToRole="comptes" />
           <NavigationProperty Name="etatspostes" Relationship="Self.Postes_EtatsPostes_FK" FromRole="postes" ToRole="etatspostes" />
-          <NavigationProperty Name="locaux" Relationship="Self.Postes_Locaux_FK" FromRole="postes" ToRole="locaux" />
+          <NavigationProperty Name="locaux" Relationship="bd_lama.Postes_Locaux_FK" FromRole="postes" ToRole="locaux" />
         </EntityType>
         <EntityType Name="prix">
           <Key>
@@ -883,8 +871,8 @@
           <Property Name="idLocal" Type="Int32" Nullable="false" />
           <Property Name="idCompte" Type="Int32" Nullable="false" />
           <NavigationProperty Name="comptes" Relationship="Self.TournoixLocaux_Comptes_FK" FromRole="tournoislocaux" ToRole="comptes" />
-          <NavigationProperty Name="locaux" Relationship="Self.TournoixLocaux_Locaux_FK" FromRole="tournoislocaux" ToRole="locaux" />
           <NavigationProperty Name="tournois" Relationship="Self.TournoixLocaux_Tournois_FK" FromRole="tournoislocaux" ToRole="tournois" />
+          <NavigationProperty Name="locaux" Relationship="bd_lama.TournoixLocaux_Locaux_FK" FromRole="tournoislocaux" ToRole="locaux" />
         </EntityType>
         <EntityType Name="tours">
           <Key>
@@ -1104,30 +1092,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Postes_Locaux_FK">
-          <End Role="locaux" Type="Self.locaux" Multiplicity="1" />
-          <End Role="postes" Type="Self.postes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="locaux">
-              <PropertyRef Name="idLocal" />
-            </Principal>
-            <Dependent Role="postes">
-              <PropertyRef Name="idLocal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TournoixLocaux_Locaux_FK">
-          <End Role="locaux" Type="Self.locaux" Multiplicity="1" />
-          <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="locaux">
-              <PropertyRef Name="idLocal" />
-            </Principal>
-            <Dependent Role="tournoislocaux">
-              <PropertyRef Name="idLocal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Parties_Tours_FK">
           <End Role="tours" Type="Self.tours" Multiplicity="1" />
           <End Role="parties" Type="Self.parties" Multiplicity="*" />
@@ -1220,7 +1184,6 @@
           <EntitySet Name="etatspostes" EntityType="Self.etatspostes" />
           <EntitySet Name="jeux" EntityType="Self.jeux" />
           <EntitySet Name="jeuxcomptes" EntityType="Self.jeuxcomptes" />
-          <EntitySet Name="locaux" EntityType="Self.locaux" />
           <EntitySet Name="messages" EntityType="Self.messages" />
           <EntitySet Name="participants" EntityType="Self.participants" />
           <EntitySet Name="parties" EntityType="Self.parties" />
@@ -1301,14 +1264,6 @@
             <End Role="participants" EntitySet="participants" />
             <End Role="jeuxcomptes" EntitySet="jeuxcomptes" />
           </AssociationSet>
-          <AssociationSet Name="Postes_Locaux_FK" Association="Self.Postes_Locaux_FK">
-            <End Role="locaux" EntitySet="locaux" />
-            <End Role="postes" EntitySet="postes" />
-          </AssociationSet>
-          <AssociationSet Name="TournoixLocaux_Locaux_FK" Association="Self.TournoixLocaux_Locaux_FK">
-            <End Role="locaux" EntitySet="locaux" />
-            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
-          </AssociationSet>
           <AssociationSet Name="Parties_Tours_FK" Association="Self.Parties_Tours_FK">
             <End Role="tours" EntitySet="tours" />
             <End Role="parties" EntitySet="parties" />
@@ -1337,7 +1292,49 @@
             <End Role="tournois" EntitySet="tournois" />
             <End Role="tours" EntitySet="tours" />
           </AssociationSet>
+          <EntitySet Name="locaux" EntityType="bd_lama.locaux" />
+          <AssociationSet Name="Postes_Locaux_FK" Association="bd_lama.Postes_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Locaux_FK" Association="bd_lama.TournoixLocaux_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="locaux">
+          <Key>
+            <PropertyRef Name="idLocal" />
+          </Key>
+          <Property Name="idLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="postes" Relationship="bd_lama.Postes_Locaux_FK" FromRole="locaux" ToRole="postes" />
+          <NavigationProperty Name="tournoislocaux" Relationship="bd_lama.TournoixLocaux_Locaux_FK" FromRole="locaux" ToRole="tournoislocaux" />
+        </EntityType>
+        <Association Name="Postes_Locaux_FK">
+          <End Type="bd_lama.locaux" Role="locaux" Multiplicity="1" />
+          <End Type="bd_lama.postes" Role="postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Locaux_FK">
+          <End Type="bd_lama.locaux" Role="locaux" Multiplicity="1" />
+          <End Type="bd_lama.tournoislocaux" Role="tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1417,15 +1414,6 @@
                 <ScalarProperty Name="detail" ColumnName="detail" />
                 <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
                 <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="locaux">
-            <EntityTypeMapping TypeName="bd_lama.locaux">
-              <MappingFragment StoreEntitySet="locaux">
-                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
-                <ScalarProperty Name="numero" ColumnName="numero" />
-                <ScalarProperty Name="aile" ColumnName="aile" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1561,6 +1549,14 @@
                 <ScalarProperty Name="dateDebut" ColumnName="dateDebut" />
                 <ScalarProperty Name="dateFin" ColumnName="dateFin" />
                 <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locaux">
+            <EntityTypeMapping TypeName="bd_lama.locaux">
+              <MappingFragment StoreEntitySet="locaux">
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

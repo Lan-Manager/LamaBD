@@ -32,7 +32,6 @@ namespace LamaBD
         public virtual DbSet<etatspostes> etatspostes { get; set; }
         public virtual DbSet<jeux> jeux { get; set; }
         public virtual DbSet<jeuxcomptes> jeuxcomptes { get; set; }
-        public virtual DbSet<locaux> locaux { get; set; }
         public virtual DbSet<messages> messages { get; set; }
         public virtual DbSet<participants> participants { get; set; }
         public virtual DbSet<parties> parties { get; set; }
@@ -45,5 +44,6 @@ namespace LamaBD
         public virtual DbSet<tournois> tournois { get; set; }
         public virtual DbSet<tournoislocaux> tournoislocaux { get; set; }
         public virtual DbSet<tours> tours { get; set; }
+        public virtual DbSet<locaux> locaux { get; set; }
     }
 }

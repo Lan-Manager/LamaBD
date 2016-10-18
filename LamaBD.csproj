@@ -76,6 +76,9 @@
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
     <Compile Include="helper\CompteHelper.cs" />
+    <Compile Include="helper\LocalHelper.cs" />
+    <Compile Include="helper\ParticipantHelper.cs" />
+    <Compile Include="helper\templateHelper.cs" />
     <Compile Include="jeux.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>

@@ -20,7 +20,7 @@ namespace LamaBD
         public int idCompte { get; set; }
     
         public virtual comptes comptes { get; set; }
-        public virtual locaux locaux { get; set; }
         public virtual tournois tournois { get; set; }
+        public virtual locaux locaux { get; set; }
     }
 }

@@ -23,7 +23,6 @@ namespace LamaBD
     
         public int idLocal { get; set; }
         public string numero { get; set; }
-        public string aile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<postes> postes { get; set; }
