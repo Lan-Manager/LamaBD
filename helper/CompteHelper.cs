@@ -20,6 +20,18 @@ namespace LamaBD.helper
             }
         }
 
+        public async static Task<comptes> SelectCompte(string nomUtilisateur)
+        {
+            using (var ctx = new Connexion420())
+            {
+                var query = from c in ctx.comptes
+                            where c.nomUtilisateur == nomUtilisateur
+                            select c;
+                comptes obj = await query.SingleOrDefaultAsync();
+                return obj;
+            }
+        }
+
         public static async Task<comptes> SelectByIDAsync(string id)
         {
             int num;

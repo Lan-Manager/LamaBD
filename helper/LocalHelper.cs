@@ -31,5 +31,20 @@ namespace LamaBD.helper
                 return obj;
             }
         }
+
+
+        public async static Task<List<locaux>> SelectLocauxTournoiAsync()
+        {
+            using (var ctx = new Connexion420())
+            {
+                var query = from l in ctx.locaux
+                            orderby l.numero ascending
+                            join tl in ctx.tournoislocaux on l.idLocal equals tl.idLocal
+                            join t in ctx.tournois on tl.idTournoi equals t.idTournoi
+                            where t.enCours == true
+                            select l;
+                return await query.ToListAsync();
+            }
+        }
     }
 }
