@@ -108,6 +108,19 @@ namespace LamaBD.helper
             }
         }
 
+        public static async Task<List<comptes>> SelectAllComptesTournoi(bool estAdmin = false)
+        {
+            using (var ctx = new Connexion420())
+            {
+                var query = from c in ctx.comptes
+                            join ct in ctx.comptestournois on c.idCompte equals ct.idCompte
+                            join t in ctx.tournois on ct.idTournoi equals t.idTournoi
+                            where c.estAdmin == estAdmin && t.enCours == true
+                            orderby c.nomUtilisateur ascending
+                            select c;
+                return await query.ToListAsync();
+            }
+        }
         public static async Task<bool> InsertAsync(comptes obj)
         {
             using (var ctx = new Connexion420())
