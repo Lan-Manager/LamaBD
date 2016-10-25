@@ -13,23 +13,33 @@ namespace LamaBD.helper
         {
             using (var ctx = new Connexion420())
             {
-                var query = from l in ctx.locaux
+                var query = ctx.locaux
+                    .Include(x => x.postes.Select(y => y.etatspostes))
+                    .OrderBy(x => x.numero);
+
+                /*var query = from l in ctx.locaux
                             orderby l.numero ascending
                             select l;
+                */
                 return await query.ToListAsync();
             }
         }
 
+        /// <summary>
+        /// Retour async d'un local par son numéro de local.
+        /// La liste Postes associés sont garantis d'êtres présent avec leur état.
+        /// </summary>
+        /// <param name="numero">Numédo du local ie: (D125)</param>
+        /// <returns>Une task contenant un objet locaux</returns>
         public static async Task<locaux> SelectByNumeroAsync(string numero)
         {
             using (var ctx = new Connexion420())
             {
                 var local = ctx.locaux
                     .Where(x => x.numero == numero)
-                    .Include(x => x.postes)
-                    .Include(x => x.tournoislocaux.Select(y => y.tournois))
-                    .Include(x => x.tournoislocaux.Select(y => y.comptes))
-                        ;
+                    .Include(x => x.postes.Select(y => y.etatspostes));
+                    //.Include(x => x.tournoislocaux.Select(y => y.tournois))
+                    //.Include(x => x.tournoislocaux.Select(y => y.comptes))
                 /*
                 var query = from l in ctx.locaux
                             where l.numero == numero
