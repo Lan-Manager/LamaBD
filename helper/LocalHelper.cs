@@ -33,6 +33,36 @@ namespace LamaBD.helper
         }
 
 
+        /// <summary>
+        /// Méthode pour mettre a jour le volontaire associé à un local.
+        /// </summary>
+        /// <param name="numero">Le numéro du local</param>
+        /// <param name="nomUtilisateur">Le nom d'utilisateur du volontaire.</param>
+        /// <returns></returns>
+        public static async Task<bool> UpdateAsync(string numero, string nomUtilisateur)
+        {
+            using (var ctx = new Connexion420())
+            {
+                var tournoi = from tl in ctx.tournoislocaux
+                              join l in ctx.locaux on tl.idLocal equals l.idLocal
+                              where l.numero == numero
+                              select tl;
+                tournoislocaux toulo = await tournoi.SingleOrDefaultAsync();
+                var nouvVol = from c in ctx.comptes
+                              where c.nomUtilisateur == nomUtilisateur
+                              select c.idCompte;
+                int compt = await nouvVol.SingleOrDefaultAsync();
+
+                toulo.idCompte = compt;
+
+                await ctx.SaveChangesAsync();
+                return true;
+            }
+            //Erreur possible
+            return false;
+        }
+
+
         public async static Task<List<locaux>> SelectLocauxTournoiAsync()
         {
             using (var ctx = new Connexion420())

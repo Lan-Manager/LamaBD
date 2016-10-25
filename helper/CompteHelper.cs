@@ -9,6 +9,46 @@ namespace LamaBD.helper
 {
     public class CompteHelper
     {
+
+        /// <summary>
+        /// Fonction qui retourne le compte du volontaire assigné au local.
+        /// </summary>
+        /// <param name="numeroLocal">Le numéro du local assigné.</param>
+        /// <returns></returns>
+        public static async Task<string> SelectByLocalAssigne(string numeroLocal)
+        {
+            using (var ctx = new Connexion420())
+            {
+                var query = from tl in ctx.tournoislocaux
+                            join l in ctx.locaux on tl.idLocal equals l.idLocal
+                            join c in ctx.comptes on tl.idCompte equals c.idCompte
+                            where l.numero == numeroLocal
+                            select c.nomUtilisateur;
+                string compte = await query.SingleOrDefaultAsync();
+                return compte;
+            }
+        }
+        /// <summary>
+        /// Fonction qui retourne le compte du volontaire assigné à la dernière modification.
+        /// </summary>
+        /// <param name="numeroLocal">Le numéro du local assigné.</param>
+        /// <returns></returns>
+        public static async Task<string> SelectByModificationEtat(int numeroPoste, string numeroLocal)
+        {
+            using (var ctx = new Connexion420())
+            {
+                var query = from p in ctx.postes
+                            join l in ctx.locaux on p.idLocal equals l.idLocal
+                            join c in ctx.comptes on p.idCompte equals c.idCompte
+                            where p.numeroPoste == numeroPoste && l.numero == numeroLocal
+                            select c.nomUtilisateur;
+                string compte = await query.SingleOrDefaultAsync();
+                return compte;
+            }
+        }
+
+
+
         public async static Task<List<comptes>> SelectAllAsync()
         {
             using (var ctx = new Connexion420())
