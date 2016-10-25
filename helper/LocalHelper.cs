@@ -27,7 +27,8 @@ namespace LamaBD.helper
                 var local = ctx.locaux
                     .Where(x => x.numero == numero)
                     .Include(x => x.postes)
-                    .Include(x => x.tournoislocaux)
+                    .Include(x => x.tournoislocaux.Select(y => y.tournois))
+                    .Include(x => x.tournoislocaux.Select(y => y.comptes))
                         ;
                 /*
                 var query = from l in ctx.locaux
