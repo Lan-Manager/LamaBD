@@ -63,6 +63,9 @@
     <Compile Include="comptes.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
+    <Compile Include="comptestournois.cs">
+      <DependentUpon>ModelLama.tt</DependentUpon>
+    </Compile>
     <Compile Include="equipes.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
@@ -73,6 +76,9 @@
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
     <Compile Include="etatspostes.cs">
+      <DependentUpon>ModelLama.tt</DependentUpon>
+    </Compile>
+    <Compile Include="etatstournois.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
     <Compile Include="helper\CompteHelper.cs" />

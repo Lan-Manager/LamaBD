@@ -12,13 +12,14 @@ namespace LamaBD
     using System;
     using System.Collections.Generic;
     
-    public partial class equipesparticipants
+    public partial class comptestournois
     {
-        public int idEquipeParticipant { get; set; }
-        public int idEquipe { get; set; }
-        public int idParticipant { get; set; }
+        public int idCompteTournoi { get; set; }
+        public int idTournoi { get; set; }
+        public int idCompte { get; set; }
+        public System.DateTime lastUpdated { get; set; }
     
-        public virtual equipes equipes { get; set; }
-        public virtual participants participants { get; set; }
+        public virtual comptes comptes { get; set; }
+        public virtual tournois tournois { get; set; }
     }
 }

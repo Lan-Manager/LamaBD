@@ -12,24 +12,18 @@ namespace LamaBD
     using System;
     using System.Collections.Generic;
     
-    public partial class parties
+    public partial class etatstournois
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public parties()
+        public etatstournois()
         {
-            this.equipesparties = new HashSet<equipesparties>();
+            this.tournois = new HashSet<tournois>();
         }
     
-        public int idPartie { get; set; }
-        public int idTour { get; set; }
-        public int numPartie { get; set; }
-        public bool estTermine { get; set; }
-        public Nullable<System.TimeSpan> dureeJeu { get; set; }
-        public System.DateTime dateFin { get; set; }
-        public System.DateTime lastUpdated { get; set; }
+        public int idEtatTournoi { get; set; }
+        public string nom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<equipesparties> equipesparties { get; set; }
-        public virtual tours tours { get; set; }
+        public virtual ICollection<tournois> tournois { get; set; }
     }
 }
