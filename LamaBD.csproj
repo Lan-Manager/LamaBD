@@ -59,7 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="comptes.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
@@ -84,7 +83,11 @@
     <Compile Include="helper\CompteHelper.cs" />
     <Compile Include="helper\LocalHelper.cs" />
     <Compile Include="helper\ParticipantHelper.cs" />
+    <Compile Include="helper\PartieHelper.cs" />
+    <Compile Include="helper\PosteHelper.cs" />
     <Compile Include="helper\templateHelper.cs" />
+    <Compile Include="helper\TourHelper.cs" />
+    <Compile Include="helper\TournoiHelper.cs" />
     <Compile Include="jeux.cs">
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
