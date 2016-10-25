@@ -24,10 +24,17 @@ namespace LamaBD.helper
         {
             using (var ctx = new Connexion420())
             {
+                var local = ctx.locaux
+                    .Where(x => x.numero == numero)
+                    .Include(x => x.postes)
+                    .Include(x => x.tournoislocaux)
+                        ;
+                /*
                 var query = from l in ctx.locaux
                             where l.numero == numero
                             select l;
-                locaux obj = await query.SingleOrDefaultAsync();
+                */
+                locaux obj = await local.SingleOrDefaultAsync();
                 return obj;
             }
         }
