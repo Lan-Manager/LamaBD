@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6aa0b7186602430c9ba86fa11b31d3e4" Name="Diagram1" ZoomLevel="34">
+      <Diagram DiagramId="6aa0b7186602430c9ba86fa11b31d3e4" Name="Diagram1" ZoomLevel="111">
         <EntityTypeShape EntityType="bd_lama.comptes" Width="1.5" PointX="0.75" PointY="12" />
         <EntityTypeShape EntityType="bd_lama.comptestournois" Width="1.5" PointX="8.25" PointY="12.875" />
         <EntityTypeShape EntityType="bd_lama.equipes" Width="1.5" PointX="8.25" PointY="8.625" />
