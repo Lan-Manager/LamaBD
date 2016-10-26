@@ -81,6 +81,7 @@
       <DependentUpon>ModelLama.tt</DependentUpon>
     </Compile>
     <Compile Include="helper\CompteHelper.cs" />
+    <Compile Include="helper\EquipeHelper.cs" />
     <Compile Include="helper\LocalHelper.cs" />
     <Compile Include="helper\ParticipantHelper.cs" />
     <Compile Include="helper\PartieHelper.cs" />

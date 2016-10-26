@@ -13,7 +13,7 @@ namespace LamaBD.helper
         /// Retour async des locaux.
         /// Chaque local est garanti d'avoir leur liste de postes chargés, ainsi que l'état de chaque postes.
         /// </summary>
-        /// <returns>Une task contenant une list d'objet locaux</returns>
+        /// <returns>Une task contenant une list d'objets locaux</returns>
         public async static Task<List<locaux>> SelectAllAsync()
         {
             using (var ctx = new Connexion420())
