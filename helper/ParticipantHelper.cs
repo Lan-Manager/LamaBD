@@ -26,6 +26,7 @@ namespace LamaBD.helper
             }
         }
 
+        [Obsolete]
         public async static Task<List<Participant_NomCompte>> SelectLoLPlayersAsync()
         {
             using (var ctx = new Connexion420())
@@ -36,6 +37,32 @@ namespace LamaBD.helper
                             where j.nom == "League of Legends"
                             select new Participant_NomCompte { Participant = p, NomCompte = jc.nomCompte };
                 return await query.ToListAsync();
+            }
+        }
+
+
+        /// <summary>
+        /// Retour async de tout les participants ayant un compte league of legends.
+        /// Le jeuxcomptes du jeu League of Legends associé aux participants est garanti d'être présent.
+        /// </summary>
+        /// <returns>Une task contenant une liste d'objets participants</returns>
+        public async static Task<List<participants>> SelectAllLoLPlayersAsync()
+        {
+            using (var ctx = new Connexion420())
+            {
+                var part = ctx.participants.Include(x => x.jeuxcomptes);
+
+                //Ne filtre pas
+                //TODO: fix
+                var jeu = ctx.jeux
+                    .Where(x => x.nom == "League of Ls")
+                    .FirstOrDefault();
+
+                var compt = ctx.jeuxcomptes
+                    .Where(x => x.idJeu == jeu.idJeu);
+
+
+                return await part.ToListAsync();
             }
         }
     }
