@@ -74,5 +74,17 @@ namespace LamaBD.helper
                 return await query.ToListAsync();
             }
         }
+
+        public static async Task<string> CreationTournoi(tournois obj)
+        {
+            using (var ctx = new Connexion420())
+            {
+                ctx.tournois.Add(obj);
+
+                await ctx.SaveChangesAsync();
+                return "Tournoi créé.";
+
+            }
+        }
     }
 }
