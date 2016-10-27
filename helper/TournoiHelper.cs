@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,7 +82,21 @@ namespace LamaBD.helper
             {
                 ctx.tournois.Add(obj);
 
-                await ctx.SaveChangesAsync();
+                try
+                {
+                    await ctx.SaveChangesAsync();
+                }
+                catch (DbEntityValidationException exc)
+                {
+                    foreach (var eve in exc.EntityValidationErrors)
+                    {
+                        Console.WriteLine(eve.ValidationErrors);
+                        Console.WriteLine(eve.Entry);
+                    }
+
+                }
+
+
                 return "Tournoi créé.";
 
             }
