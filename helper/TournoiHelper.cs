@@ -81,7 +81,6 @@ namespace LamaBD.helper
             using (var ctx = new Connexion420())
             {
                 ctx.tournois.Add(obj);
-
                 try
                 {
                     await ctx.SaveChangesAsync();
@@ -94,6 +93,10 @@ namespace LamaBD.helper
                         Console.WriteLine(eve.Entry);
                     }
 
+                }
+                catch (Exception exct)
+                {
+                    Console.WriteLine(exct.Message);
                 }
 
 
