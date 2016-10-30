@@ -86,17 +86,27 @@ namespace LamaBD.helper
         }
 
 
+        /// <summary>
+        /// Postes, compte ayant fait la dernière modif et l'états des postes garanti
+        /// </summary>
+        /// <returns></returns>
         public async static Task<List<locaux>> SelectLocauxTournoiAsync()
         {
             using (var ctx = new Connexion420())
             {
-                var query = from l in ctx.locaux
+                var query = from l in ctx.locaux.Include(x => x.postes.Select(y => y.etatspostes))
                             orderby l.numero ascending
                             join tl in ctx.tournoislocaux on l.idLocal equals tl.idLocal
                             join t in ctx.tournois on tl.idTournoi equals t.idTournoi
                             where t.enCours == true
                             select l;
-                return await query.ToListAsync();
+
+                var locaux = ctx.locaux
+                    .Where(x => query.Contains(x))
+                    .Include(x => x.postes.Select(y => y.etatspostes))
+                    .Include(x => x.postes.Select(y => y.comptes));
+
+                return await locaux.ToListAsync();
             }
         }
     }
