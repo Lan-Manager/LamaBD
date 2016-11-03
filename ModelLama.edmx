@@ -207,7 +207,7 @@
           <Property Name="idTournoiLocal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idTournoi" Type="int" Nullable="false" />
           <Property Name="idLocal" Type="int" Nullable="false" />
-          <Property Name="idCompte" Type="int" Nullable="false" />
+          <Property Name="idCompte" Type="int" />
         </EntityType>
         <EntityType Name="tours">
           <Key>
@@ -522,7 +522,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="TournoixLocaux_Comptes_FK">
-          <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
+          <End Role="comptes" Type="Self.comptes" Multiplicity="0..1" />
           <End Role="tournoislocaux" Type="Self.tournoislocaux" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="comptes">
@@ -733,7 +733,6 @@
           <EntitySet Name="scoresequipesparties" EntityType="bd_lama.scoresequipesparties" />
           <EntitySet Name="statistiques" EntityType="bd_lama.statistiques" />
           <EntitySet Name="statistiquesjeux" EntityType="bd_lama.statistiquesjeux" />
-          <EntitySet Name="tournoislocaux" EntityType="bd_lama.tournoislocaux" />
           <EntitySet Name="tours" EntityType="bd_lama.tours" />
           <AssociationSet Name="ComptesTournois_Comptes_FK" Association="bd_lama.ComptesTournois_Comptes_FK">
             <End Role="comptes" EntitySet="comptes" />
@@ -746,10 +745,6 @@
           <AssociationSet Name="Postes_Comptes_FK" Association="bd_lama.Postes_Comptes_FK">
             <End Role="comptes" EntitySet="comptes" />
             <End Role="postes" EntitySet="postes" />
-          </AssociationSet>
-          <AssociationSet Name="TournoixLocaux_Comptes_FK" Association="bd_lama.TournoixLocaux_Comptes_FK">
-            <End Role="comptes" EntitySet="comptes" />
-            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
           </AssociationSet>
           <AssociationSet Name="EquipesParticipants_Equipes_FK" Association="bd_lama.EquipesParticipants_Equipes_FK">
             <End Role="equipes" EntitySet="equipes" />
@@ -794,10 +789,6 @@
           <AssociationSet Name="Postes_Locaux_FK" Association="bd_lama.Postes_Locaux_FK">
             <End Role="locaux" EntitySet="locaux" />
             <End Role="postes" EntitySet="postes" />
-          </AssociationSet>
-          <AssociationSet Name="TournoixLocaux_Locaux_FK" Association="bd_lama.TournoixLocaux_Locaux_FK">
-            <End Role="locaux" EntitySet="locaux" />
-            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
           </AssociationSet>
           <AssociationSet Name="Parties_Tours_FK" Association="bd_lama.Parties_Tours_FK">
             <End Role="tours" EntitySet="tours" />
@@ -844,13 +835,22 @@
             <End Role="tournois" EntitySet="tournois" />
             <End Role="prixtournois" EntitySet="prixtournois" />
           </AssociationSet>
-          <AssociationSet Name="TournoixLocaux_Tournois_FK" Association="bd_lama.TournoixLocaux_Tournois_FK">
-            <End Role="tournois" EntitySet="tournois" />
-            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
-          </AssociationSet>
           <AssociationSet Name="Tours_Tournois_FK" Association="bd_lama.Tours_Tournois_FK">
             <End Role="tournois" EntitySet="tournois" />
             <End Role="tours" EntitySet="tours" />
+          </AssociationSet>
+          <EntitySet Name="tournoislocaux" EntityType="bd_lama.tournoislocaux" />
+          <AssociationSet Name="TournoixLocaux_Comptes_FK" Association="bd_lama.TournoixLocaux_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Locaux_FK" Association="bd_lama.TournoixLocaux_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
+          </AssociationSet>
+          <AssociationSet Name="TournoixLocaux_Tournois_FK" Association="bd_lama.TournoixLocaux_Tournois_FK">
+            <End Role="tournois" EntitySet="tournois" />
+            <End Role="tournoislocaux" EntitySet="tournoislocaux" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="comptes">
@@ -870,8 +870,8 @@
           <NavigationProperty Name="comptestournois" Relationship="bd_lama.ComptesTournois_Comptes_FK" FromRole="comptes" ToRole="comptestournois" />
           <NavigationProperty Name="messages" Relationship="bd_lama.Messages_Comptes_FK" FromRole="comptes" ToRole="messages" />
           <NavigationProperty Name="postes" Relationship="bd_lama.Postes_Comptes_FK" FromRole="comptes" ToRole="postes" />
-          <NavigationProperty Name="tournoislocaux" Relationship="bd_lama.TournoixLocaux_Comptes_FK" FromRole="comptes" ToRole="tournoislocaux" />
           <NavigationProperty Name="tournois" Relationship="bd_lama.Tournois_Comptes_FK" FromRole="comptes" ToRole="tournois" />
+          <NavigationProperty Name="tournoislocaux" Relationship="bd_lama.TournoixLocaux_Comptes_FK" FromRole="comptes" ToRole="tournoislocaux" />
         </EntityType>
         <EntityType Name="comptestournois">
           <Key>
@@ -1073,18 +1073,6 @@
           <NavigationProperty Name="scoresequipesparties" Relationship="bd_lama.ScoresEquipesParties_StatistiquesJeux_FK" FromRole="statistiquesjeux" ToRole="scoresequipesparties" />
           <NavigationProperty Name="statistiques" Relationship="bd_lama.StatistiquesJeux_Satistiques_FK" FromRole="statistiquesjeux" ToRole="statistiques" />
         </EntityType>
-        <EntityType Name="tournoislocaux">
-          <Key>
-            <PropertyRef Name="idTournoiLocal" />
-          </Key>
-          <Property Name="idTournoiLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTournoi" Type="Int32" Nullable="false" />
-          <Property Name="idLocal" Type="Int32" Nullable="false" />
-          <Property Name="idCompte" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="comptes" Relationship="bd_lama.TournoixLocaux_Comptes_FK" FromRole="tournoislocaux" ToRole="comptes" />
-          <NavigationProperty Name="locaux" Relationship="bd_lama.TournoixLocaux_Locaux_FK" FromRole="tournoislocaux" ToRole="locaux" />
-          <NavigationProperty Name="tournois" Relationship="bd_lama.TournoixLocaux_Tournois_FK" FromRole="tournoislocaux" ToRole="tournois" />
-        </EntityType>
         <EntityType Name="tours">
           <Key>
             <PropertyRef Name="idTour" />
@@ -1131,18 +1119,6 @@
               <PropertyRef Name="idCompte" />
             </Principal>
             <Dependent Role="postes">
-              <PropertyRef Name="idCompte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TournoixLocaux_Comptes_FK">
-          <End Type="bd_lama.comptes" Role="comptes" Multiplicity="1" />
-          <End Type="bd_lama.tournoislocaux" Role="tournoislocaux" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="comptes">
-              <PropertyRef Name="idCompte" />
-            </Principal>
-            <Dependent Role="tournoislocaux">
               <PropertyRef Name="idCompte" />
             </Dependent>
           </ReferentialConstraint>
@@ -1279,18 +1255,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TournoixLocaux_Locaux_FK">
-          <End Type="bd_lama.locaux" Role="locaux" Multiplicity="1" />
-          <End Type="bd_lama.tournoislocaux" Role="tournoislocaux" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="locaux">
-              <PropertyRef Name="idLocal" />
-            </Principal>
-            <Dependent Role="tournoislocaux">
-              <PropertyRef Name="idLocal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Parties_Tours_FK">
           <End Type="bd_lama.tours" Role="tours" Multiplicity="1" />
           <End Type="bd_lama.parties" Role="parties" Multiplicity="*" />
@@ -1364,8 +1328,8 @@
           <NavigationProperty Name="etatstournois" Relationship="bd_lama.Tournois_EtatsTournois_FK" FromRole="tournois" ToRole="etatstournois" />
           <NavigationProperty Name="jeux" Relationship="bd_lama.Tournois_Jeux_FK" FromRole="tournois" ToRole="jeux" />
           <NavigationProperty Name="prixtournois" Relationship="bd_lama.PrixTournois_Tournois_FK" FromRole="tournois" ToRole="prixtournois" />
-          <NavigationProperty Name="tournoislocaux" Relationship="bd_lama.TournoixLocaux_Tournois_FK" FromRole="tournois" ToRole="tournoislocaux" />
           <NavigationProperty Name="tours" Relationship="bd_lama.Tours_Tournois_FK" FromRole="tournois" ToRole="tours" />
+          <NavigationProperty Name="tournoislocaux" Relationship="bd_lama.TournoixLocaux_Tournois_FK" FromRole="tournois" ToRole="tournoislocaux" />
         </EntityType>
         <Association Name="Tournois_Comptes_FK">
           <End Type="bd_lama.comptes" Role="comptes" Multiplicity="1" />
@@ -1451,18 +1415,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TournoixLocaux_Tournois_FK">
-          <End Type="bd_lama.tournois" Role="tournois" Multiplicity="1" />
-          <End Type="bd_lama.tournoislocaux" Role="tournoislocaux" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tournois">
-              <PropertyRef Name="idTournoi" />
-            </Principal>
-            <Dependent Role="tournoislocaux">
-              <PropertyRef Name="idTournoi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Tours_Tournois_FK">
           <End Type="bd_lama.tournois" Role="tournois" Multiplicity="1" />
           <End Type="bd_lama.tours" Role="tours" Multiplicity="*" />
@@ -1471,6 +1423,54 @@
               <PropertyRef Name="idTournoi" />
             </Principal>
             <Dependent Role="tours">
+              <PropertyRef Name="idTournoi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tournoislocaux">
+          <Key>
+            <PropertyRef Name="idTournoiLocal" />
+          </Key>
+          <Property Name="idTournoiLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTournoi" Type="Int32" Nullable="false" />
+          <Property Name="idLocal" Type="Int32" Nullable="false" />
+          <Property Name="idCompte" Type="Int32" />
+          <NavigationProperty Name="comptes" Relationship="bd_lama.TournoixLocaux_Comptes_FK" FromRole="tournoislocaux" ToRole="comptes" />
+          <NavigationProperty Name="locaux" Relationship="bd_lama.TournoixLocaux_Locaux_FK" FromRole="tournoislocaux" ToRole="locaux" />
+          <NavigationProperty Name="tournois" Relationship="bd_lama.TournoixLocaux_Tournois_FK" FromRole="tournoislocaux" ToRole="tournois" />
+        </EntityType>
+        <Association Name="TournoixLocaux_Comptes_FK">
+          <End Type="bd_lama.comptes" Role="comptes" Multiplicity="0..1" />
+          <End Type="bd_lama.tournoislocaux" Role="tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Locaux_FK">
+          <End Type="bd_lama.locaux" Role="locaux" Multiplicity="1" />
+          <End Type="bd_lama.tournoislocaux" Role="tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TournoixLocaux_Tournois_FK">
+          <End Type="bd_lama.tournois" Role="tournois" Multiplicity="1" />
+          <End Type="bd_lama.tournoislocaux" Role="tournoislocaux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tournois">
+              <PropertyRef Name="idTournoi" />
+            </Principal>
+            <Dependent Role="tournoislocaux">
               <PropertyRef Name="idTournoi" />
             </Dependent>
           </ReferentialConstraint>
@@ -1676,16 +1676,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tournoislocaux">
-            <EntityTypeMapping TypeName="bd_lama.tournoislocaux">
-              <MappingFragment StoreEntitySet="tournoislocaux">
-                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
-                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
-                <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
-                <ScalarProperty Name="idTournoiLocal" ColumnName="idTournoiLocal" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tours">
             <EntityTypeMapping TypeName="bd_lama.tours">
               <MappingFragment StoreEntitySet="tours">
@@ -1716,6 +1706,16 @@
                 <ScalarProperty Name="idCompte" ColumnName="idCompte" />
                 <ScalarProperty Name="idJeu" ColumnName="idJeu" />
                 <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tournoislocaux">
+            <EntityTypeMapping TypeName="bd_lama.tournoislocaux">
+              <MappingFragment StoreEntitySet="tournoislocaux">
+                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
+                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
+                <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
+                <ScalarProperty Name="idTournoiLocal" ColumnName="idTournoiLocal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
