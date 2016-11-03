@@ -76,7 +76,7 @@ namespace LamaBD.helper
             }
         }
 
-        public static async Task<string> CreationTournoi(tournois obj)
+        public static async Task<bool> CreationTournoi(tournois obj)
         {
             using (var ctx = new Connexion420())
             {
@@ -92,15 +92,17 @@ namespace LamaBD.helper
                         Console.WriteLine(eve.ValidationErrors);
                         Console.WriteLine(eve.Entry);
                     }
+                    return false;
 
                 }
                 catch (Exception exct)
                 {
                     Console.WriteLine(exct.Message);
+                    return false;
                 }
 
 
-                return "Tournoi créé.";
+                return true;
 
             }
         }
