@@ -18,7 +18,7 @@
           <Property Name="prenom" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="estAdmin" Type="bool" Nullable="false" />
           <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="comptestournois">
           <Key>
@@ -27,7 +27,7 @@
           <Property Name="idCompteTournoi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idTournoi" Type="int" Nullable="false" />
           <Property Name="idCompte" Type="int" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="equipes">
           <Key>
@@ -38,7 +38,7 @@
           <Property Name="nom" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="estElimine" Type="bool" Nullable="false" />
           <Property Name="dateEnregistrement" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="equipesparticipants">
           <Key>
@@ -88,7 +88,7 @@
           <Property Name="nomCompte" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="detail" Type="varchar" MaxLength="255" />
           <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="locaux">
           <Key>
@@ -104,7 +104,7 @@
           <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idCompte" Type="int" Nullable="false" />
           <Property Name="contenu" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="dateEnvoie" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="dateEnvoie" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="participants">
           <Key>
@@ -115,7 +115,7 @@
           <Property Name="nom" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="prenom" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="parties">
           <Key>
@@ -127,7 +127,7 @@
           <Property Name="estTermine" Type="bool" Nullable="false" />
           <Property Name="dureeJeu" Type="time" Precision="0" />
           <Property Name="dateFin" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="postes">
           <Key>
@@ -138,7 +138,7 @@
           <Property Name="idEtatPoste" Type="int" Nullable="false" />
           <Property Name="idCompte" Type="int" />
           <Property Name="numeroPoste" Type="int" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="prix">
           <Key>
@@ -198,7 +198,7 @@
           <Property Name="description" Type="varchar" MaxLength="255" />
           <Property Name="enCours" Type="bool" Nullable="false" />
           <Property Name="dateCreation" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="tournoislocaux">
           <Key>
@@ -219,7 +219,7 @@
           <Property Name="estFinal" Type="bool" Nullable="false" />
           <Property Name="dateDebut" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="dateFin" Type="datetime" Precision="0" />
-          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <Association Name="ComptesTournois_Comptes_FK">
           <End Role="comptes" Type="Self.comptes" Multiplicity="1" />
@@ -866,7 +866,7 @@
           <Property Name="prenom" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="estAdmin" Type="Boolean" Nullable="false" />
           <Property Name="dateCreation" Type="DateTime" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="comptestournois" Relationship="bd_lama.ComptesTournois_Comptes_FK" FromRole="comptes" ToRole="comptestournois" />
           <NavigationProperty Name="messages" Relationship="bd_lama.Messages_Comptes_FK" FromRole="comptes" ToRole="messages" />
           <NavigationProperty Name="postes" Relationship="bd_lama.Postes_Comptes_FK" FromRole="comptes" ToRole="postes" />
@@ -880,7 +880,7 @@
           <Property Name="idCompteTournoi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idTournoi" Type="Int32" Nullable="false" />
           <Property Name="idCompte" Type="Int32" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="comptes" Relationship="bd_lama.ComptesTournois_Comptes_FK" FromRole="comptestournois" ToRole="comptes" />
           <NavigationProperty Name="tournois" Relationship="bd_lama.ComptesTournois_Tournois_FK" FromRole="comptestournois" ToRole="tournois" />
         </EntityType>
@@ -893,7 +893,7 @@
           <Property Name="nom" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="estElimine" Type="Boolean" Nullable="false" />
           <Property Name="dateEnregistrement" Type="DateTime" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="equipesparticipants" Relationship="bd_lama.EquipesParticipants_Equipes_FK" FromRole="equipes" ToRole="equipesparticipants" />
           <NavigationProperty Name="equipesparties" Relationship="bd_lama.EquipesParties_Equipes_FK" FromRole="equipes" ToRole="equipesparties" />
           <NavigationProperty Name="prix" Relationship="bd_lama.Prix_Equipes_FK" FromRole="equipes" ToRole="prix" />
@@ -958,7 +958,7 @@
           <Property Name="nomCompte" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="detail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="dateCreation" Type="DateTime" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="jeux" Relationship="bd_lama.JeuxComptes_Jeux_FK" FromRole="jeuxcomptes" ToRole="jeux" />
           <NavigationProperty Name="participants" Relationship="bd_lama.JeuxComptes_Participants_FK" FromRole="jeuxcomptes" ToRole="participants" />
         </EntityType>
@@ -978,7 +978,7 @@
           <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idCompte" Type="Int32" Nullable="false" />
           <Property Name="contenu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="dateEnvoie" Type="DateTime" Nullable="false" />
+          <Property Name="dateEnvoie" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="comptes" Relationship="bd_lama.Messages_Comptes_FK" FromRole="messages" ToRole="comptes" />
         </EntityType>
         <EntityType Name="participants">
@@ -990,7 +990,7 @@
           <Property Name="nom" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="prenom" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="dateCreation" Type="DateTime" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="equipesparticipants" Relationship="bd_lama.EquipesParticipants_Participants_FK" FromRole="participants" ToRole="equipesparticipants" />
           <NavigationProperty Name="jeuxcomptes" Relationship="bd_lama.JeuxComptes_Participants_FK" FromRole="participants" ToRole="jeuxcomptes" />
         </EntityType>
@@ -1004,7 +1004,7 @@
           <Property Name="estTermine" Type="Boolean" Nullable="false" />
           <Property Name="dureeJeu" Type="Time" />
           <Property Name="dateFin" Type="DateTime" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="equipesparties" Relationship="bd_lama.EquipesParties_Parties_FK" FromRole="parties" ToRole="equipesparties" />
           <NavigationProperty Name="tours" Relationship="bd_lama.Parties_Tours_FK" FromRole="parties" ToRole="tours" />
         </EntityType>
@@ -1017,7 +1017,7 @@
           <Property Name="idEtatPoste" Type="Int32" Nullable="false" />
           <Property Name="idCompte" Type="Int32" />
           <Property Name="numeroPoste" Type="Int32" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="comptes" Relationship="bd_lama.Postes_Comptes_FK" FromRole="postes" ToRole="comptes" />
           <NavigationProperty Name="etatspostes" Relationship="bd_lama.Postes_EtatsPostes_FK" FromRole="postes" ToRole="etatspostes" />
           <NavigationProperty Name="locaux" Relationship="bd_lama.Postes_Locaux_FK" FromRole="postes" ToRole="locaux" />
@@ -1083,7 +1083,7 @@
           <Property Name="estFinal" Type="Boolean" Nullable="false" />
           <Property Name="dateDebut" Type="DateTime" Nullable="false" />
           <Property Name="dateFin" Type="DateTime" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="parties" Relationship="bd_lama.Parties_Tours_FK" FromRole="tours" ToRole="parties" />
           <NavigationProperty Name="tournois" Relationship="bd_lama.Tours_Tournois_FK" FromRole="tours" ToRole="tournois" />
         </EntityType>
@@ -1320,7 +1320,7 @@
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="enCours" Type="Boolean" Nullable="false" />
           <Property Name="dateCreation" Type="DateTime" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="comptes" Relationship="bd_lama.Tournois_Comptes_FK" FromRole="tournois" ToRole="comptes" />
           <NavigationProperty Name="comptestournois" Relationship="bd_lama.ComptesTournois_Tournois_FK" FromRole="tournois" ToRole="comptestournois" />
           <NavigationProperty Name="equipes" Relationship="bd_lama.Equipes_Tournois_FK" FromRole="tournois" ToRole="equipes" />

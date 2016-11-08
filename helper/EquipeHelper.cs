@@ -44,5 +44,31 @@ namespace LamaBD.helper
             }
         }
 
+        public static async Task<bool> CreationEquipe(List<equipes> list)
+        {
+            using (var ctx = new Connexion420())
+            {
+                //http://stackoverflow.com/questions/5943394/why-is-inserting-entities-in-ef-4-1-so-slow-compared-to-objectcontext/5943699#5943699
+                ctx.Configuration.AutoDetectChangesEnabled = false;
+
+                foreach (equipes entity in list)
+                {
+                    ctx.equipes.Add(entity);
+                }
+                try
+                {
+                    await ctx.SaveChangesAsync();
+                }
+                catch (Exception exct)
+                {
+                    Console.WriteLine(exct.Message);
+                    return false;
+                }
+
+                return true;
+
+            }
+        }
+
     }
 }
