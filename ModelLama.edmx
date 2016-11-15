@@ -138,6 +138,7 @@
           <Property Name="idEtatPoste" Type="int" Nullable="false" />
           <Property Name="idCompte" Type="int" />
           <Property Name="numeroPoste" Type="int" Nullable="false" />
+          <Property Name="commentaire" Type="varchar" MaxLength="255" />
           <Property Name="lastUpdated" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="prix">
@@ -727,7 +728,6 @@
           <EntitySet Name="messages" EntityType="bd_lama.messages" />
           <EntitySet Name="participants" EntityType="bd_lama.participants" />
           <EntitySet Name="parties" EntityType="bd_lama.parties" />
-          <EntitySet Name="postes" EntityType="bd_lama.postes" />
           <EntitySet Name="prix" EntityType="bd_lama.prix" />
           <EntitySet Name="prixtournois" EntityType="bd_lama.prixtournois" />
           <EntitySet Name="scoresequipesparties" EntityType="bd_lama.scoresequipesparties" />
@@ -741,10 +741,6 @@
           <AssociationSet Name="Messages_Comptes_FK" Association="bd_lama.Messages_Comptes_FK">
             <End Role="comptes" EntitySet="comptes" />
             <End Role="messages" EntitySet="messages" />
-          </AssociationSet>
-          <AssociationSet Name="Postes_Comptes_FK" Association="bd_lama.Postes_Comptes_FK">
-            <End Role="comptes" EntitySet="comptes" />
-            <End Role="postes" EntitySet="postes" />
           </AssociationSet>
           <AssociationSet Name="EquipesParticipants_Equipes_FK" Association="bd_lama.EquipesParticipants_Equipes_FK">
             <End Role="equipes" EntitySet="equipes" />
@@ -770,10 +766,6 @@
             <End Role="equipesparties" EntitySet="equipesparties" />
             <End Role="scoresequipesparties" EntitySet="scoresequipesparties" />
           </AssociationSet>
-          <AssociationSet Name="Postes_EtatsPostes_FK" Association="bd_lama.Postes_EtatsPostes_FK">
-            <End Role="etatspostes" EntitySet="etatspostes" />
-            <End Role="postes" EntitySet="postes" />
-          </AssociationSet>
           <AssociationSet Name="JeuxComptes_Jeux_FK" Association="bd_lama.JeuxComptes_Jeux_FK">
             <End Role="jeux" EntitySet="jeux" />
             <End Role="jeuxcomptes" EntitySet="jeuxcomptes" />
@@ -785,10 +777,6 @@
           <AssociationSet Name="JeuxComptes_Participants_FK" Association="bd_lama.JeuxComptes_Participants_FK">
             <End Role="participants" EntitySet="participants" />
             <End Role="jeuxcomptes" EntitySet="jeuxcomptes" />
-          </AssociationSet>
-          <AssociationSet Name="Postes_Locaux_FK" Association="bd_lama.Postes_Locaux_FK">
-            <End Role="locaux" EntitySet="locaux" />
-            <End Role="postes" EntitySet="postes" />
           </AssociationSet>
           <AssociationSet Name="Parties_Tours_FK" Association="bd_lama.Parties_Tours_FK">
             <End Role="tours" EntitySet="tours" />
@@ -852,6 +840,19 @@
             <End Role="tournois" EntitySet="tournois" />
             <End Role="tournoislocaux" EntitySet="tournoislocaux" />
           </AssociationSet>
+          <EntitySet Name="postes" EntityType="bd_lama.postes" />
+          <AssociationSet Name="Postes_Comptes_FK" Association="bd_lama.Postes_Comptes_FK">
+            <End Role="comptes" EntitySet="comptes" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_EtatsPostes_FK" Association="bd_lama.Postes_EtatsPostes_FK">
+            <End Role="etatspostes" EntitySet="etatspostes" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
+          <AssociationSet Name="Postes_Locaux_FK" Association="bd_lama.Postes_Locaux_FK">
+            <End Role="locaux" EntitySet="locaux" />
+            <End Role="postes" EntitySet="postes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="comptes">
           <Key>
@@ -869,9 +870,9 @@
           <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="comptestournois" Relationship="bd_lama.ComptesTournois_Comptes_FK" FromRole="comptes" ToRole="comptestournois" />
           <NavigationProperty Name="messages" Relationship="bd_lama.Messages_Comptes_FK" FromRole="comptes" ToRole="messages" />
-          <NavigationProperty Name="postes" Relationship="bd_lama.Postes_Comptes_FK" FromRole="comptes" ToRole="postes" />
           <NavigationProperty Name="tournois" Relationship="bd_lama.Tournois_Comptes_FK" FromRole="comptes" ToRole="tournois" />
           <NavigationProperty Name="tournoislocaux" Relationship="bd_lama.TournoixLocaux_Comptes_FK" FromRole="comptes" ToRole="tournoislocaux" />
+          <NavigationProperty Name="postes" Relationship="bd_lama.Postes_Comptes_FK" FromRole="comptes" ToRole="postes" />
         </EntityType>
         <EntityType Name="comptestournois">
           <Key>
@@ -968,8 +969,8 @@
           </Key>
           <Property Name="idLocal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="numero" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="postes" Relationship="bd_lama.Postes_Locaux_FK" FromRole="locaux" ToRole="postes" />
           <NavigationProperty Name="tournoislocaux" Relationship="bd_lama.TournoixLocaux_Locaux_FK" FromRole="locaux" ToRole="tournoislocaux" />
+          <NavigationProperty Name="postes" Relationship="bd_lama.Postes_Locaux_FK" FromRole="locaux" ToRole="postes" />
         </EntityType>
         <EntityType Name="messages">
           <Key>
@@ -1007,20 +1008,6 @@
           <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="equipesparties" Relationship="bd_lama.EquipesParties_Parties_FK" FromRole="parties" ToRole="equipesparties" />
           <NavigationProperty Name="tours" Relationship="bd_lama.Parties_Tours_FK" FromRole="parties" ToRole="tours" />
-        </EntityType>
-        <EntityType Name="postes">
-          <Key>
-            <PropertyRef Name="idPoste" />
-          </Key>
-          <Property Name="idPoste" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idLocal" Type="Int32" Nullable="false" />
-          <Property Name="idEtatPoste" Type="Int32" Nullable="false" />
-          <Property Name="idCompte" Type="Int32" />
-          <Property Name="numeroPoste" Type="Int32" Nullable="false" />
-          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="comptes" Relationship="bd_lama.Postes_Comptes_FK" FromRole="postes" ToRole="comptes" />
-          <NavigationProperty Name="etatspostes" Relationship="bd_lama.Postes_EtatsPostes_FK" FromRole="postes" ToRole="etatspostes" />
-          <NavigationProperty Name="locaux" Relationship="bd_lama.Postes_Locaux_FK" FromRole="postes" ToRole="locaux" />
         </EntityType>
         <EntityType Name="prix">
           <Key>
@@ -1111,18 +1098,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Postes_Comptes_FK">
-          <End Type="bd_lama.comptes" Role="comptes" Multiplicity="0..1" />
-          <End Type="bd_lama.postes" Role="postes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="comptes">
-              <PropertyRef Name="idCompte" />
-            </Principal>
-            <Dependent Role="postes">
-              <PropertyRef Name="idCompte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="EquipesParticipants_Equipes_FK">
           <End Type="bd_lama.equipes" Role="equipes" Multiplicity="1" />
           <End Type="bd_lama.equipesparticipants" Role="equipesparticipants" Multiplicity="*" />
@@ -1195,18 +1170,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Postes_EtatsPostes_FK">
-          <End Type="bd_lama.etatspostes" Role="etatspostes" Multiplicity="1" />
-          <End Type="bd_lama.postes" Role="postes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="etatspostes">
-              <PropertyRef Name="idEtatPoste" />
-            </Principal>
-            <Dependent Role="postes">
-              <PropertyRef Name="idEtatPoste" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="JeuxComptes_Jeux_FK">
           <End Type="bd_lama.jeux" Role="jeux" Multiplicity="1" />
           <End Type="bd_lama.jeuxcomptes" Role="jeuxcomptes" Multiplicity="*" />
@@ -1240,18 +1203,6 @@
             </Principal>
             <Dependent Role="jeuxcomptes">
               <PropertyRef Name="idParticipant" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Postes_Locaux_FK">
-          <End Type="bd_lama.locaux" Role="locaux" Multiplicity="1" />
-          <End Type="bd_lama.postes" Role="postes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="locaux">
-              <PropertyRef Name="idLocal" />
-            </Principal>
-            <Dependent Role="postes">
-              <PropertyRef Name="idLocal" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1475,6 +1426,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="postes">
+          <Key>
+            <PropertyRef Name="idPoste" />
+          </Key>
+          <Property Name="idPoste" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idLocal" Type="Int32" Nullable="false" />
+          <Property Name="idEtatPoste" Type="Int32" Nullable="false" />
+          <Property Name="idCompte" Type="Int32" />
+          <Property Name="numeroPoste" Type="Int32" Nullable="false" />
+          <Property Name="commentaire" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="lastUpdated" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="comptes" Relationship="bd_lama.Postes_Comptes_FK" FromRole="postes" ToRole="comptes" />
+          <NavigationProperty Name="etatspostes" Relationship="bd_lama.Postes_EtatsPostes_FK" FromRole="postes" ToRole="etatspostes" />
+          <NavigationProperty Name="locaux" Relationship="bd_lama.Postes_Locaux_FK" FromRole="postes" ToRole="locaux" />
+        </EntityType>
+        <Association Name="Postes_Comptes_FK">
+          <End Type="bd_lama.comptes" Role="comptes" Multiplicity="0..1" />
+          <End Type="bd_lama.postes" Role="postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comptes">
+              <PropertyRef Name="idCompte" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idCompte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_EtatsPostes_FK">
+          <End Type="bd_lama.etatspostes" Role="etatspostes" Multiplicity="1" />
+          <End Type="bd_lama.postes" Role="postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="etatspostes">
+              <PropertyRef Name="idEtatPoste" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idEtatPoste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Postes_Locaux_FK">
+          <End Type="bd_lama.locaux" Role="locaux" Multiplicity="1" />
+          <End Type="bd_lama.postes" Role="postes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locaux">
+              <PropertyRef Name="idLocal" />
+            </Principal>
+            <Dependent Role="postes">
+              <PropertyRef Name="idLocal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1618,18 +1620,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="postes">
-            <EntityTypeMapping TypeName="bd_lama.postes">
-              <MappingFragment StoreEntitySet="postes">
-                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
-                <ScalarProperty Name="numeroPoste" ColumnName="numeroPoste" />
-                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
-                <ScalarProperty Name="idEtatPoste" ColumnName="idEtatPoste" />
-                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
-                <ScalarProperty Name="idPoste" ColumnName="idPoste" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="prix">
             <EntityTypeMapping TypeName="bd_lama.prix">
               <MappingFragment StoreEntitySet="prix">
@@ -1716,6 +1706,19 @@
                 <ScalarProperty Name="idLocal" ColumnName="idLocal" />
                 <ScalarProperty Name="idTournoi" ColumnName="idTournoi" />
                 <ScalarProperty Name="idTournoiLocal" ColumnName="idTournoiLocal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postes">
+            <EntityTypeMapping TypeName="bd_lama.postes">
+              <MappingFragment StoreEntitySet="postes">
+                <ScalarProperty Name="lastUpdated" ColumnName="lastUpdated" />
+                <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+                <ScalarProperty Name="numeroPoste" ColumnName="numeroPoste" />
+                <ScalarProperty Name="idCompte" ColumnName="idCompte" />
+                <ScalarProperty Name="idEtatPoste" ColumnName="idEtatPoste" />
+                <ScalarProperty Name="idLocal" ColumnName="idLocal" />
+                <ScalarProperty Name="idPoste" ColumnName="idPoste" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

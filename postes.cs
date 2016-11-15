@@ -19,6 +19,7 @@ namespace LamaBD
         public int idEtatPoste { get; set; }
         public Nullable<int> idCompte { get; set; }
         public int numeroPoste { get; set; }
+        public string commentaire { get; set; }
         public System.DateTime lastUpdated { get; set; }
     
         public virtual comptes comptes { get; set; }

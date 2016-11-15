@@ -19,9 +19,9 @@ namespace LamaBD
         {
             this.comptestournois = new HashSet<comptestournois>();
             this.messages = new HashSet<messages>();
-            this.postes = new HashSet<postes>();
             this.tournois = new HashSet<tournois>();
             this.tournoislocaux = new HashSet<tournoislocaux>();
+            this.postes = new HashSet<postes>();
         }
     
         public int idCompte { get; set; }
@@ -40,10 +40,10 @@ namespace LamaBD
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<messages> messages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<postes> postes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tournois> tournois { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tournoislocaux> tournoislocaux { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<postes> postes { get; set; }
     }
 }
